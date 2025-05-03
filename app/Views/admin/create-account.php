@@ -37,6 +37,37 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <a href="<?=site_url('accounts')?>"
+                                    class="btn btn-default text-success btn-5 d-none d-sm-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 12l14 0" />
+                                        <path d="M5 12l6 6" />
+                                        <path d="M5 12l6 -6" />
+                                    </svg>
+                                    Back
+                                </a>
+                                <a href="<?=site_url('accounts')?>"
+                                    class="btn btn-default text-success btn-6 d-sm-none btn-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 12l14 0" />
+                                        <path d="M5 12l6 6" />
+                                        <path d="M5 12l6 -6" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- BEGIN MODAL -->
+                            <!-- END MODAL -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,19 +75,66 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div class="row g-3">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title"><?=$title?></div>
+                                    <form method="POST" class="row g-3" id="frmAccount">
+                                        <div class="col-lg-12">
+                                            <label class="form-label">Complete Name</label>
+                                            <input type="text" class="form-control" name="fullname" id="fullname"
+                                                placeholder="Enter Complete Name" required />
+                                            <div id="fullname-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row g-3">
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" id="email"
+                                                        placeholder="Enter Email" required />
+                                                    <div id="email-error" class="error-message text-danger text-sm">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">Employee ID</label>
+                                                    <input type="text" class="form-control" name="employee_id"
+                                                        placeholder="Enter Employee ID" required />
+                                                    <div id="employee_id-error"
+                                                        class="error-message text-danger text-sm"></div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">System Role</label>
+                                                    <select name="role" class="form-select" required>
+                                                        <option value="">Choose</option>
+                                                    </select>
+                                                    <div id="role-error" class="error-message text-danger text-sm">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-success">Create Account</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
             <!--  BEGIN FOOTER  -->
-            <footer class="footer footer-transparent d-print-none">
+            <footer class=" footer footer-transparent d-print-none">
                 <div class="container-xl">
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; <?= date('Y')?>
-                                    <a href="." class="link-secondary">CvSU-CCC ROTC Unit Portal</a>. All rights
+                                    <a href="." class="link-secondary">CvSU-CCC ROTC Unit Portal</a>.
+                                    All rights
                                     reserved.
                                 </li>
                                 <li class="list-inline-item">

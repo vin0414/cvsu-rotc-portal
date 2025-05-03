@@ -26,11 +26,18 @@ $routes->post('checkAuth','Administrator::checkAuth');
 $routes->get('sign-out','Administrator::logout');
 $routes->get('download','Download::downloadFile');
 $routes->post('restore','Restore::restoreFile');
+//ajax
+$routes->get('fetch-account','Administrator::fetchAccount');
+$routes->post('save-account','Administrator::saveAccount');
 
 $routes->group('',['filter'=>'AdminCheck'],function($routes)
 {
     $routes->get('dashboard','Administrator::index');
     $routes->get('cadet-information','Administrator::cadetInformation');
+    $routes->get('cadet/view/(:any)','Administrator::cadetView/$1');
+    $routes->get('training-schedule','Administrator::trainingSchedule');
+    $routes->get('attendance','Administrator::attendance');
+    $routes->get('announcement','Administrator::announcement');
     $routes->get('accounts','Administrator::accounts');
     $routes->get('create-account','Administrator::createAccount');
     $routes->get('register','Administrator::register');

@@ -53,10 +53,13 @@
                         <div class="col-lg-3">
                             <input type="search" class="form-control" placeholder="Type here..." name="search" />
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
                             <button type="submit" class="btn btn-success">
                                 <i class="ti ti-search"></i>&nbsp;Search
                             </button>
+                            <a href="<?=site_url('register')?>" class="btn btn-secondary">
+                                <i class="ti ti-users-plus"></i>&nbsp;New Cadet
+                            </a>
                         </div>
                     </form>
                     <div class="row row-cards" id="results">
@@ -69,26 +72,33 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body p-4 text-center">
+                                    <?php if(empty($row['photo'])): ?>
                                     <span class="avatar avatar-xl mb-3 rounded"
-                                        style="background-image: url(<?=base_url('assets/images/profile')?>/<?php echo $row['photo'] ?>);width:100%;height:10rem;"></span>
+                                        style="background-image: url(<?=base_url('assets/images/logo.png')?>);width:100%;height:10rem;">
+                                    </span>
+                                    <?php else : ?>
+                                    <span class="avatar avatar-xl mb-3 rounded"
+                                        style="background-image: url(<?=base_url('assets/images/profile')?>/<?php echo $row['photo'] ?>);width:100%;height:10rem;">
+                                    </span>
+                                    <?php endif; ?>
                                     <h3 class="m-0 mb-1">
-                                        <a href="<?=site_url('cadet')?>/<?php echo $row['student_id'] ?>">
-                                            <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
-                                            <?php echo $row->mi ?>
+                                        <a href="<?=site_url('cadet')?>/<?php echo $row['school_id'] ?>">
+                                            <?php echo $row['surname'] ?>, <?php echo $row['first_name'] ?>
+                                            <?php echo $row['middle_name'] ?>
                                         </a>
                                     </h3>
-                                    <div class="text-secondary"><?php echo $row->roleName ?></div>
+                                    <div class="text-secondary"><?php echo $row['school_id'] ?></div>
                                     <div class="mt-3">
-                                        <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
+                                        <span class="badge bg-success-lt"><?php echo $row['email'] ?></span>
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <a href="mailto:<?php echo $row->email ?>" class="card-btn">
-                                        <i class="ti ti-mail"></i>&nbsp;Email
+                                    <a href="" class="card-btn bg-success text-white">
+                                        <i class="ti ti-calendar"></i>&nbsp;Schedule
                                     </a>
-                                    <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>"
-                                        class="card-btn">
-                                        <i class="ti ti-address-book"></i>&nbsp;Profile
+                                    <a href="<?=site_url('cadet/view/')?><?=$row['school_id']?>"
+                                        class="card-btn bg-success text-white">
+                                        <i class="ti ti-address-book"></i>&nbsp;Records
                                     </a>
                                 </div>
                             </div>

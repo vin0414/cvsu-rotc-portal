@@ -44,7 +44,23 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="tblaccount">
+                                    <thead>
+                                        <th>Employee ID</th>
+                                        <th>Fullname</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -79,6 +95,44 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    let account = $('#tblaccount').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": window.location.origin + "/fetch-account",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
+            },
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "id"
+            },
+            {
+                "data": "fullname"
+            },
+            {
+                "data": "email"
+            },
+            {
+                "data": "role"
+            },
+            {
+                "data": "status"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
+    </script>
 </body>
 
 </html>

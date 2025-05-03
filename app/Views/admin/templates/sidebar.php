@@ -114,7 +114,7 @@
                                 <path d="M19 16v6" />
                             </svg>
                         </span>
-                        <span class="nav-link-title"> Register Cadet </span>
+                        <span class="nav-link-title"> New Cadet </span>
                     </a>
                 </li>
                 <li class="nav-item <?= ($title == 'Create Account') ? 'active' : '' ?>">

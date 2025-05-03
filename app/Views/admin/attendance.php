@@ -37,37 +37,6 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
-                        <div class="col-auto ms-auto d-print-none">
-                            <div class="btn-list">
-                                <a href="<?=site_url('cadet-information')?>"
-                                    class="btn btn-default text-success btn-5 d-none d-sm-inline-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M5 12l14 0" />
-                                        <path d="M5 12l6 6" />
-                                        <path d="M5 12l6 -6" />
-                                    </svg>
-                                    Back
-                                </a>
-                                <a href="<?=site_url('cadet-information')?>"
-                                    class="btn btn-default text-success btn-6 d-sm-none btn-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M5 12l14 0" />
-                                        <path d="M5 12l6 6" />
-                                        <path d="M5 12l6 -6" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <!-- BEGIN MODAL -->
-                            <!-- END MODAL -->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -109,7 +78,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

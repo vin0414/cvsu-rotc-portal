@@ -53,9 +53,18 @@ class Administrator extends BaseController
             {
                 if(Hash::check($this->request->getPost('password'), $account['password']))
                 {
-                    session()->set('loggedAdmin', $account['employee_id']);
+                    session()->set('loggedAdmin', $account['account_id']);
                     session()->set('fullname', $account['fullname']);
                     session()->set('role', $account['role']);
+                    //logs
+                    date_default_timezone_set('Asia/Manila');
+                    $logModel = new \App\Models\logModel();
+                    $data = ['account_id'=>$account['account_id'],
+                            'activities'=>'Logged On',
+                            'page'=>'Login page',
+                            'datetime'=>date('Y-m-d h:i:s a')
+                            ];      
+                    $logModel->save($data);
                     return redirect()->to('/dashboard');
                 }
                 else
@@ -72,6 +81,15 @@ class Administrator extends BaseController
 
     public function logout()
     {
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = ['account_id'=>session()->get('loggedAdmin'),
+                'activities'=>'Logged Out',
+                'page'=>'Login page',
+                'datetime'=>date('Y-m-d h:i:s a')
+                ];      
+        $logModel->save($data);
         if(session()->has('loggedAdmin'))
         {
             session()->remove('loggedAdmin');
@@ -90,5 +108,50 @@ class Administrator extends BaseController
         $title = 'Overview';
         $data = ['title'=>$title];
         return view('admin/dashboard',$data);
+    }
+
+    public function cadetInformation()
+    {
+        $title = 'Cadets';
+        //students
+        $studentModel = new \App\Models\studentModel();
+        $students = $studentModel->WHERE('status',1)->findAll();
+
+        $data = ['title'=>$title,'students'=>$students];
+        return view('admin/cadet-information',$data);
+    }
+
+    public function accounts()
+    {
+        $title = 'Accounts';
+        $data = ['title'=>$title];
+        return view('admin/manage-user',$data);
+    }
+
+    public function createAccount()
+    {
+        $title = 'Create Account';
+        $data = ['title'=>$title];
+        return view('admin/create-account',$data);
+    }
+
+    public function recovery()
+    {
+        $title = 'Back-up and Recovery';
+        $data = ['title'=>$title];
+        return view('admin/recovery',$data);
+    }
+
+    public function settings()
+    {
+        $title = 'Settings';
+        //logs
+        $builder = $this->db->table('logs a');
+        $builder->select('a.*,b.fullname');
+        $builder->join('accounts b','b.account_id=a.account_id','LEFT');
+        $logs = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'logs'=>$logs];
+        return view('admin/settings',$data);
     }
 }

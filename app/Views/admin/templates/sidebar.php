@@ -99,8 +99,8 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>
-                <li class="nav-item <?= ($title == 'enrolment') ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?=site_url('enrolment')?>">
+                <li class="nav-item <?= ($title == 'Register') ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?=site_url('register')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

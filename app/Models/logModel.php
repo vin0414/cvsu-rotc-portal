@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class studentModel extends Model
+class logModel extends Model
 {
-    protected $table            = 'students';
-    protected $primaryKey       = 'student_id';
+    protected $table            = 'logs';
+    protected $primaryKey       = 'log_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['school_id','password','first_name','middle_name','surname','suffix',
-                                    'email','status','is_enroll','photo','token','date_created'];
+    protected $allowedFields    = ['account_id','activities','page','datetime'];
 
     // Dates
     protected $useTimestamps = false;

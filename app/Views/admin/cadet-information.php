@@ -44,54 +44,57 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="card">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                                <li class="nav-item">
-                                    <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
-                                        <i class="ti ti-devices-cog"></i>&nbsp;Officers
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tabs-platoon-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-devices-cog"></i>&nbsp;Units/Platoons
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-clipboard-data"></i>&nbsp;System Logs
-                                    </a>
-                                </li>
-                            </ul>
+                    <form method="GET" class="row g-3 mb-4" id="frmSearch">
+                        <div class="col-lg-2">
+                            <select name="platoon" class="form-select">
+                                <option value="">All Units</option>
+                            </select>
                         </div>
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane fade active show" id="tabs-home-8"></div>
-                                <div class="tab-pane fade" id="tabs-platoon-8"></div>
-                                <div class="tab-pane fade" id="tabs-activity-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="tbl_logs">
-                                            <thead>
-                                                <th>Date & Time</th>
-                                                <th>Fullname</th>
-                                                <th>Activities</th>
-                                                <th>Pages</th>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach($logs as $row): ?>
-                                                <tr>
-                                                    <td><?=$row->datetime?></td>
-                                                    <td><?=$row->fullname?></td>
-                                                    <td><?=$row->activities ?></td>
-                                                    <td><?=$row->page ?></td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                        <div class="col-lg-3">
+                            <input type="search" class="form-control" placeholder="Type here..." name="search" />
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="ti ti-search"></i>&nbsp;Search
+                            </button>
+                        </div>
+                    </form>
+                    <div class="row row-cards" id="results">
+                        <?php if(empty($students)): ?>
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning" role="alert">No Cadet(s) Has Been Registered Yet</div>
+                        </div>
+                        <?php else : ?>
+                        <?php foreach($students as $row): ?>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body p-4 text-center">
+                                    <span class="avatar avatar-xl mb-3 rounded"
+                                        style="background-image: url(<?=base_url('assets/images/profile')?>/<?php echo $row['photo'] ?>);width:100%;height:10rem;"></span>
+                                    <h3 class="m-0 mb-1">
+                                        <a href="<?=site_url('cadet')?>/<?php echo $row['student_id'] ?>">
+                                            <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                                            <?php echo $row->mi ?>
+                                        </a>
+                                    </h3>
+                                    <div class="text-secondary"><?php echo $row->roleName ?></div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
                                     </div>
+                                </div>
+                                <div class="d-flex">
+                                    <a href="mailto:<?php echo $row->email ?>" class="card-btn">
+                                        <i class="ti ti-mail"></i>&nbsp;Email
+                                    </a>
+                                    <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>"
+                                        class="card-btn">
+                                        <i class="ti ti-address-book"></i>&nbsp;Profile
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -127,9 +130,6 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    $('#tbl_logs').DataTable();
-    </script>
 </body>
 
 </html>

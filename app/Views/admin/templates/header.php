@@ -77,7 +77,7 @@
                 <!-- BEGIN NAVBAR MENU -->
                 <ul class="navbar-nav">
                     <li class="nav-item <?= ($title == 'Overview') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('overview')?>">
+                        <a class="nav-link" href="<?=site_url('dashboard')?>">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -91,7 +91,7 @@
                             <span class="nav-link-title"> Overview </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Cadet') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Cadets') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('cadet-information')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -174,7 +174,7 @@
                         </a>
                     </li>
                     <li
-                        class="nav-item dropdown <?= ($title == 'Maintenance'||$title == 'Recovery'||$title == 'Settings') ? 'active' : '' ?>">
+                        class="nav-item dropdown <?= ($title == 'Back-up and Recovery'||$title == 'Settings') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">

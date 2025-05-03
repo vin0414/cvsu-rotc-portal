@@ -24,12 +24,16 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 //admin
 $routes->post('checkAuth','Administrator::checkAuth');
 $routes->get('sign-out','Administrator::logout');
+$routes->get('download','Download::downloadFile');
+$routes->post('restore','Restore::restoreFile');
 
 $routes->group('',['filter'=>'AdminCheck'],function($routes)
 {
     $routes->get('dashboard','Administrator::index');
+    $routes->get('cadet-information','Administrator::cadetInformation');
     $routes->get('accounts','Administrator::accounts');
     $routes->get('create-account','Administrator::createAccount');
+    $routes->get('register','Administrator::register');
     $routes->get('recovery','Administrator::recovery');
     $routes->get('settings','Administrator::settings');
     $routes->get('my-account','Administrator::myAccount');

@@ -80,7 +80,7 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title"><?=$title?></div>
+                                    <div class="card-title"><i class="ti ti-user-plus"></i>&nbsp;<?=$title?></div>
                                     <form method="POST" class="row g-3" id="frmAccount">
                                         <div class="col-lg-12">
                                             <label class="form-label">Complete Name</label>
@@ -108,6 +108,9 @@
                                                     <label class="form-label">System Role</label>
                                                     <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
+                                                        <option>Super-admin</option>
+                                                        <option>Moderator</option>
+                                                        <option>Standard-user</option>
                                                     </select>
                                                     <div id="role-error" class="error-message text-danger text-sm">
                                                     </div>
@@ -115,7 +118,58 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button type="submit" class="btn btn-success">Create Account</button>
+                                            <label class="form-label">Account Status</label>
+                                            <div class="form-selectgroup-boxes row mb-3">
+                                                <div class="col-lg-3">
+                                                    <label class="form-selectgroup-item">
+                                                        <input type="radio" name="status" value="1"
+                                                            class="form-selectgroup-input" checked />
+                                                        <span
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
+                                                            <span class="me-3">
+                                                                <span class="form-selectgroup-check"></span>
+                                                            </span>
+                                                            <span class="form-selectgroup-label-content">
+                                                                <span
+                                                                    class="form-selectgroup-title strong mb-1">Active</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label class="form-selectgroup-item">
+                                                        <input type="radio" name="status" value="0"
+                                                            class="form-selectgroup-input" />
+                                                        <span
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
+                                                            <span class="me-3">
+                                                                <span class="form-selectgroup-check"></span>
+                                                            </span>
+                                                            <span class="form-selectgroup-label-content">
+                                                                <span
+                                                                    class="form-selectgroup-title strong mb-1">Inactive</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div id="status-error" class="error-message text-danger text-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-success">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                                                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                    <path d="M14 4l0 4l-6 0l0 -4" />
+                                                </svg>
+                                                Create Account
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

@@ -67,7 +67,20 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="tabs-home-8"></div>
-                                <div class="tab-pane fade" id="tabs-platoon-8"></div>
+                                <div class="tab-pane fade" id="tabs-platoon-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="tblplatoon">
+                                            <thead>
+                                                <th>ID</th>
+                                                <th>Platoon/Unit Name</th>
+                                                <th>Semester</th>
+                                                <th>Year</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <div class="tab-pane fade" id="tabs-activity-8">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="tbl_logs">
@@ -129,6 +142,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $('#tbl_logs').DataTable();
+    $('#tblplatoon').DataTable();
     </script>
 </body>
 

@@ -62,7 +62,7 @@ class Home extends BaseController
                     session()->set('student_number',$student['school_id']);
                     return redirect()->to(base_url('cadet/dashboard'));
                 }
-                else
+                else 
                 {
                     session()->setFlashdata('fail','Invalid Password');
                     return redirect()->to('/')->withInput();

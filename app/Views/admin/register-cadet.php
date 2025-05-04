@@ -75,7 +75,52 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <div class="row g-3">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <i class="ti ti-user-plus"></i>&nbsp;ROTC Enrolment Form
+                                    </div>
+                                    <form method="POST" class="row g-3" id="frmRegister">
+                                        <?=csrf_field()?>
+                                        <div class="col-lg-12">
+                                            <div class="row g-3">
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" name="lastname"
+                                                        placeholder="Last Name" required>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" name="firstname"
+                                                        placeholder="First Name" required>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="form-label">M.I.</label>
+                                                    <input type="text" class="form-control" name="middlename"
+                                                        placeholder="Middle Initial" required>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="form-label">Suffix</label>
+                                                    <input type="text" class="form-control" name="suffix"
+                                                        placeholder="Suffix" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">Recent Cadets</div>
+                                <div class="position-relative">
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->

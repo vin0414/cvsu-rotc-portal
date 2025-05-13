@@ -29,6 +29,7 @@ $routes->post('restore','Restore::restoreFile');
 //ajax
 $routes->get('fetch-account','Administrator::fetchAccount');
 $routes->post('save-account','Administrator::saveAccount');
+$routes->post('save-cadet','Administrator::saveCadet');
 
 $routes->group('',['filter'=>'AdminCheck'],function($routes)
 {

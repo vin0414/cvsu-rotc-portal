@@ -91,7 +91,7 @@
                             <span class="nav-link-title"> Overview </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Cadets' || $title=='Register') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Cadets' || $title=='Register' || $title=='View') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('cadet-information')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

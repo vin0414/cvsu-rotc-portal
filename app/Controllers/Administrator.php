@@ -121,6 +121,16 @@ class Administrator extends BaseController
         return view('admin/cadet-information',$data);
     }
 
+    public function cadetView($id)
+    {
+        $title = "View";
+        $cadetModel = new \App\Models\cadetModel();
+        $cadet = $cadetModel->WHERE('school_id',$id)->first();
+
+        $data = ['title'=>$title,'cadet'=>$cadet];
+        return view('admin/cadet-view',$data);
+    }
+
     public function trainingSchedule()
     {
         $title = 'Training Schedule';

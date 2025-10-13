@@ -82,11 +82,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="calendar"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -120,43 +115,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
-    var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-        initialView: "dayGridMonth",
-        headerToolbar: {
-            start: 'title', // will normally be on the left. if RTL, will be on the right
-            center: '',
-            end: 'prev next today timeGridWeek dayGridMonth' // will normally be on the right. if RTL, will be on the left
-        },
-        selectable: true,
-        editable: true,
-        views: {
-            month: {
-                titleFormat: {
-                    month: "long",
-                    year: "numeric"
-                }
-            },
-            agendaWeek: {
-                titleFormat: {
-                    month: "long",
-                    year: "numeric",
-                    day: "numeric"
-                }
-            },
-            agendaDay: {
-                titleFormat: {
-                    month: "short",
-                    year: "numeric",
-                    day: "numeric"
-                }
-            }
-        }
-    });
-
-    calendar.render();
-    </script>
 </body>
 
 </html>

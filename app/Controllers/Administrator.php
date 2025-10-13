@@ -55,7 +55,7 @@ class Administrator extends BaseController
                 {
                     session()->set('loggedAdmin', $account['account_id']);
                     session()->set('fullname', $account['fullname']);
-                    session()->set('role', $account['role']);
+                    session()->set('role', $account['role_id']);
                     //logs
                     date_default_timezone_set('Asia/Manila');
                     $logModel = new \App\Models\logModel();
@@ -146,14 +146,14 @@ class Administrator extends BaseController
     {
         $title = 'Accounts';
         $data = ['title'=>$title];
-        return view('admin/manage-user',$data);
+        return view('admin/maintenance/accounts/manage-user',$data);
     }
 
     public function createAccount()
     {
         $title = 'Create Account';
         $data = ['title'=>$title];
-        return view('admin/create-account',$data);
+        return view('admin/maintenance/accounts/create-account',$data);
     }
 
     public function register()
@@ -167,7 +167,21 @@ class Administrator extends BaseController
     {
         $title = 'Back-up and Recovery';
         $data = ['title'=>$title];
-        return view('admin/recovery',$data);
+        return view('admin/maintenance/others/recovery',$data);
+    }
+
+    public function fetchPermission()
+    {
+        $roleModel = new \App\Models\roleModel();
+        $roles = $roleModel->findAll();
+        $totalRecords = $roleModel->countAllResults();
+        $response = [
+            "draw" => intval($_GET['draw']),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalRecords,
+            "data" => $roles
+        ];
+        return $this->response->setJSON($response);
     }
 
     public function settings()
@@ -180,7 +194,7 @@ class Administrator extends BaseController
         $logs = $builder->get()->getResult();
 
         $data = ['title'=>$title,'logs'=>$logs];
-        return view('admin/settings',$data);
+        return view('admin/maintenance/others/settings',$data);
     }
 
     public function myAccount()
@@ -194,38 +208,26 @@ class Administrator extends BaseController
     //ajax
     public function fetchAccount()
     {
-        $accountModel = new \App\Models\accountModel();
         $searchTerm = $_GET['search']['value'] ?? ''; 
-        if ($searchTerm) {
-            $accountModel->like('fullname', $searchTerm)
-                ->orLike('employee_id', $searchTerm)
-                ->orLike('email', $searchTerm); 
+        $builder = $this->db->table('accounts a');
+        $builder->select('a.*,b.role_name as role'); 
+        $builder->join('roles b','b.role_id=a.role_id','LEFT');
+        if(!empty($searchTerm))
+        {
+            $builder->like('a.fullname', $searchTerm);
+            $builder->orLike('a.employee_id', $searchTerm);
+            $builder->orLike('a.email', $searchTerm);
+            $builder->orLike('b.role', $searchTerm);
         }
-        $account = $accountModel->findAll();
-        $totalRecords = $accountModel->countAllResults();
-
-        $accountModel->like('fullname', $searchTerm)
-                ->orLike('employee_id', $searchTerm)
-                ->orLike('email', $searchTerm); 
-        $totalFiltered = $accountModel->countAllResults();
-
+        $query = $builder->get();
+        $data = $query->getResult();
+        $totalRecords = $query->getNumRows();
         $response = [
-            "draw" => $_GET['draw'],
+            "draw" => intval($_GET['draw']),
             "recordsTotal" => $totalRecords,
-            "recordsFiltered" => $totalFiltered,
-            'data' => [] 
+            "recordsFiltered" => $totalRecords,
+            "data" => $data
         ];
-        foreach ($account as $row) {
-            $response['data'][] = [
-                'id'=>$row['employee_id'],
-                'fullname'=>$row['fullname'],
-                'email'=>$row['email'],
-                'role'=>$row['role'],
-                'status'=>($row['status'] == 1) ? '<span class="badge bg-success text-white">Active</span>' : '<span class="badge bg-danger text-white">Inactive</span>', 
-                'action' => '<button class="btn btn-success editAccount" value="' . $row['account_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
-            ];
-        }
-        // Return the response as JSON
         return $this->response->setJSON($response);
     }
 

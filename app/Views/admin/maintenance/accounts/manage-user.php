@@ -113,7 +113,7 @@
         },
         "searching": true,
         "columns": [{
-                "data": "id"
+                "data": "employee_id"
             },
             {
                 "data": "fullname"
@@ -125,7 +125,14 @@
                 "data": "role"
             },
             {
-                "data": "status"
+                "data": "status",
+                render(data, type, row) {
+                    if (data == 1) {
+                        return '<span class="badge bg-success text-white">Active</span>';
+                    } else {
+                        return '<span class="badge bg-danger text-white">Inactive</span>';
+                    }
+                }
             },
             {
                 "data": "action"

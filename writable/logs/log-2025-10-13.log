@@ -1,0 +1,340 @@
+DEBUG - 2025-10-13 13:35:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:36:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:37:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:38:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:39:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:39:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 13:41:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 22:16:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:16:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:17:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:17:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:20:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:21:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:21:04 --> ErrorException: Undefined array key "role"
+[Method: GET, Route: fetch-account]
+in APPPATH\Controllers\Administrator.php on line 223.
+ 1 APPPATH\Controllers\Administrator.php(223): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "role"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 223)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:21:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:22:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:23:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:24:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:24:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:24:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:25:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:26:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:28:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:31:03 --> ErrorException: Undefined array key "role"
+[Method: GET, Route: fetch-account]
+in APPPATH\Controllers\Administrator.php on line 223.
+ 1 APPPATH\Controllers\Administrator.php(223): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "role"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 223)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:36:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-13 14:36:11 --> mysqli_sql_exception: Unknown column 'b.role' in 'field list' in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-10-13 14:36:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'b.role' in 'field list'
+[Method: GET, Route: fetch-account]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 2 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'b.role' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 4 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:12 --> [Caused by] mysqli_sql_exception: Unknown column 'b.role' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 5 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:36:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-13 14:36:22 --> mysqli_sql_exception: Unknown column 'b.role' in 'field list' in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-10-13 14:36:22 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'b.role' in 'field list'
+[Method: GET, Route: fetch-account]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 2 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:22 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'b.role' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 4 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:22 --> [Caused by] mysqli_sql_exception: Unknown column 'b.role' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 5 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:36:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-13 14:36:49 --> mysqli_sql_exception: Unknown column 'a.role' in 'on clause' in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-10-13 14:36:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'a.role' in 'on clause'
+[Method: GET, Route: fetch-account]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 2 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'a.role' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 4 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+CRITICAL - 2025-10-13 14:36:49 --> [Caused by] mysqli_sql_exception: Unknown column 'a.role' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`role_name` as `role`
+FROM `accounts` `a`
+LEFT JOIN `roles` `b` ON `b`.`role_id`=`a`.`role`', [], false)
+ 5 APPPATH\Controllers\Administrator.php(208): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:37:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:37:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:38:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:39:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:39:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:43:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:43:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:44:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:44:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:44:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:46:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:46:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:46:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:47:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:48:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:50:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:52:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:52:21 --> ErrorException: Undefined array key "draw"
+[Method: GET, Route: fetch-Permission]
+in APPPATH\Controllers\Administrator.php on line 180.
+ 1 APPPATH\Controllers\Administrator.php(180): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "draw"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 180)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:52:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:52:31 --> ErrorException: Undefined array key "draw"
+[Method: GET, Route: fetch-Permission]
+in APPPATH\Controllers\Administrator.php on line 180.
+ 1 APPPATH\Controllers\Administrator.php(180): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "draw"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 180)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:53:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:53:51 --> ErrorException: Undefined array key "draw"
+[Method: GET, Route: fetch-Permission]
+in APPPATH\Controllers\Administrator.php on line 181.
+ 1 APPPATH\Controllers\Administrator.php(181): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "draw"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 181)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:55:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-13 14:55:07 --> ErrorException: Undefined array key "draw"
+[Method: GET, Route: fetch-Permission]
+in APPPATH\Controllers\Administrator.php on line 179.
+ 1 APPPATH\Controllers\Administrator.php(179): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "draw"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 179)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-13 14:55:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:55:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 22:55:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-13 14:55:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

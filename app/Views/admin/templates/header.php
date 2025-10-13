@@ -62,7 +62,15 @@
                         style="background-image: url(<?=base_url('assets/images/user.png')?>)"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div><?=session()->get('fullname')?></div>
-                        <div class="mt-1 small text-secondary"><?=session()->get('role')?></div>
+                        <?php
+                        $roleModel = new \App\Models\roleModel();
+                        $role = $roleModel->where('role_id', session()->get('role'))->first();
+                        if ($role) {
+                            echo '<div class="mt-1 small text-secondary">' . $role['role_name'] . '</div>';
+                        } else {
+                            echo '<div class="mt-1 small text-secondary">No Role</div>';
+                        }
+                        ?>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -91,7 +99,8 @@
                             <span class="nav-link-title"> Overview </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Cadets' || $title=='Register') ? 'active' : '' ?>">
+                    <?php if($role['cadet']==1): ?>
+                    <li class="nav-item <?= ($title == 'Cadets') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('cadet-information')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -100,9 +109,11 @@
                                 <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                             </svg>
-                            <span class="nav-link-title">&nbsp;Cadet Information</span>
+                            <span class="nav-link-title">&nbsp;Cadets</span>
                         </a>
                     </li>
+                    <?php endif; ?>
+                    <?php if($role['schedule']==1): ?>
                     <li class="nav-item <?= ($title == 'Training Schedule') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('training-schedule')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -126,6 +137,8 @@
                             <span class="nav-link-title">&nbsp;Training Schedule </span>
                         </a>
                     </li>
+                    <?php endif; ?>
+                    <?php if($role['attendance']==1): ?>
                     <li class="nav-item <?= ($title == 'Attendance') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('attendance')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -143,6 +156,47 @@
                             <span class="nav-link-title">&nbsp;Attendance </span>
                         </a>
                     </li>
+                    <?php endif; ?>
+                    <?php if($role['grading_system']==1): ?>
+                    <li class="nav-item <?= ($title == 'Grading System') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?=site_url('grading-system')?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-codesandbox">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M20 7.5v9l-4 2.25l-4 2.25l-4 -2.25l-4 -2.25v-9l4 -2.25l4 -2.25l4 2.25z" />
+                                <path d="M12 12l4 -2.25l4 -2.25" />
+                                <path d="M12 12l0 9" />
+                                <path d="M12 12l-4 -2.25l-4 -2.25" />
+                                <path d="M20 12l-4 2v4.75" />
+                                <path d="M4 12l4 2l0 4.75" />
+                                <path d="M8 5.25l4 2.25l4 -2.25" />
+                            </svg>
+                            <span class="nav-link-title">&nbsp;Grading System </span>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    <li class="nav-item <?= ($title == 'Reports') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?=site_url('reports')?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-report">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
+                                <path d="M18 14v4h4" />
+                                <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2" />
+                                <path
+                                    d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                                <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                <path d="M8 11h4" />
+                                <path d="M8 15h3" />
+                            </svg>
+                            <span class="nav-link-title">&nbsp;Reports </span>
+                        </a>
+                    </li>
+                    <?php if($role['announcement']==1): ?>
                     <li class="nav-item <?= ($title == 'Announcement') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('announcement')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -158,21 +212,8 @@
                             <span class="nav-link-title">&nbsp;Announcement </span>
                         </a>
                     </li>
-                    <li
-                        class="nav-item <?= ($title == 'Accounts'||$title == 'Edit Account'||$title == 'Create Account') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('accounts')?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                troke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-                            </svg>
-                            <span class="nav-link-title">&nbsp;Accounts</span>
-                        </a>
-                    </li>
+                    <?php endif; ?>
+                    <?php if($role['maintenance']==1): ?>
                     <li
                         class="nav-item dropdown <?= ($title == 'Back-up and Recovery'||$title == 'Settings') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
@@ -192,14 +233,18 @@
                             <span class="nav-link-title">&nbsp;Maintenance </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?=site_url('recovery')?>">
+                            <a class="dropdown-item" href="<?=site_url('maintenance/recovery')?>">
                                 Back-Up and Restore
                             </a>
-                            <a class="dropdown-item" href="<?=site_url('settings')?>">
+                            <a class="dropdown-item" href="<?=site_url('maintenance/accounts')?>">
+                                Accounts
+                            </a>
+                            <a class="dropdown-item" href="<?=site_url('maintenance/settings')?>">
                                 Settings
                             </a>
                         </div>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <!-- END NAVBAR MENU -->
             </div>

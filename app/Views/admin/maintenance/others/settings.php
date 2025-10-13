@@ -49,12 +49,7 @@
                             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                                 <li class="nav-item">
                                     <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
-                                        <i class="ti ti-devices-cog"></i>&nbsp;Officers
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tabs-platoon-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-devices-cog"></i>&nbsp;Units/Platoons
+                                        <i class="ti ti-devices-cog"></i>&nbsp;User Permissions
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -66,15 +61,17 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane fade active show" id="tabs-home-8"></div>
-                                <div class="tab-pane fade" id="tabs-platoon-8">
+                                <div class="tab-pane fade active show" id="tabs-home-8">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="tblplatoon">
+                                        <table class="table table-bordered table-striped" id="user_permission">
                                             <thead>
-                                                <th>ID</th>
-                                                <th>Platoon/Unit Name</th>
-                                                <th>Semester</th>
-                                                <th>Year</th>
+                                                <th>Role</th>
+                                                <th>Cadet</th>
+                                                <th>Schedules</th>
+                                                <th>Attendance</th>
+                                                <th>Grading System</th>
+                                                <th>Announcement</th>
+                                                <th>Maintenance</th>
                                                 <th>Action</th>
                                             </thead>
                                             <tbody></tbody>
@@ -142,7 +139,79 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $('#tbl_logs').DataTable();
-    $('#tblplatoon').DataTable();
+    let permission = $('#user_permission').DataTable({
+        ajax: '<?=site_url('fetch-Permission')?>',
+        columns: [{
+                data: 'role_name'
+            },
+            {
+                data: 'cadet',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: 'schedules',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: 'attendance',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: 'grading',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: 'announcement',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: 'maintenance',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
+                    } else {
+                        return `<input class="form-check-input" type="checkbox" disabled>`;
+                    }
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return `<button class="btn btn-sm btn-primary edit_permission" data-id="${row.role_id}"><i class="ti ti-edit"></i>&nbsp;Edit</button>`;
+                }
+            }
+        ]
+    });
     </script>
 </body>
 

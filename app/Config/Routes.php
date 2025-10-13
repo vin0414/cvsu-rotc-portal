@@ -29,6 +29,7 @@ $routes->post('restore','Restore::restoreFile');
 //ajax
 $routes->get('fetch-account','Administrator::fetchAccount');
 $routes->post('save-account','Administrator::saveAccount');
+$routes->get('fetch-Permission','Administrator::fetchPermission');
 
 $routes->group('',['filter'=>'AdminCheck'],function($routes)
 {
@@ -38,11 +39,11 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     $routes->get('training-schedule','Administrator::trainingSchedule');
     $routes->get('attendance','Administrator::attendance');
     $routes->get('announcement','Administrator::announcement');
-    $routes->get('accounts','Administrator::accounts');
-    $routes->get('create-account','Administrator::createAccount');
-    $routes->get('register','Administrator::register');
-    $routes->get('recovery','Administrator::recovery');
-    $routes->get('settings','Administrator::settings');
+    //maintenance
+    $routes->get('maintenance/accounts','Administrator::accounts');
+    $routes->get('maintenance/create-account','Administrator::createAccount');
+    $routes->get('maintenance/recovery','Administrator::recovery');
+    $routes->get('maintenance/settings','Administrator::settings');
     $routes->get('my-account','Administrator::myAccount');
 });
 $routes->group('',['filter'=>'AdminAlreadyLoggedIn'],function($routes)

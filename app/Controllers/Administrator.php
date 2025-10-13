@@ -121,6 +121,16 @@ class Administrator extends BaseController
         return view('admin/cadet-information',$data);
     }
 
+    public function cadetView($id)
+    {
+        $title = "View";
+        $cadetModel = new \App\Models\cadetModel();
+        $cadet = $cadetModel->WHERE('school_id',$id)->first();
+
+        $data = ['title'=>$title,'cadet'=>$cadet];
+        return view('admin/cadet-view',$data);
+    }
+
     public function trainingSchedule()
     {
         $title = 'Training Schedule';
@@ -159,7 +169,11 @@ class Administrator extends BaseController
     public function register()
     {
         $title = "Register";
-        $data = ['title'=>$title];
+        //recent cadets
+        $cadetModel = new \App\Models\cadetModel();
+        $cadet = $cadetModel->orderBy('cadet_id','DESC')->limit(5)->findAll();
+
+        $data = ['title'=>$title,'cadet'=>$cadet];
         return view('admin/register-cadet',$data);
     }
 
@@ -236,36 +250,27 @@ class Administrator extends BaseController
         $accountModel = new \App\Models\accountModel();
         $validation = $this->validate([
             'fullname' => [
-                'rules' => 'required|is_not_unique[accounts.fullname]',
+                'rules' => 'required|is_unique[accounts.fullname]',
                 'errors' => [
                     'required' => 'Fullname is required',
-                    'is_not_unique' => 'Fullname already exists'
+                    'is_unique' => 'Fullname already exists'
                 ]
             ],
             'employee_id' => [
-                'rules' => 'required|is_not_unique[accounts.employee_id]',
+                'rules' => 'required|is_unique[accounts.employee_id]',
                 'errors' => [
                     'required' => 'Employee ID is required',
-                    'is_not_unique' => 'Employee ID already exists'
+                    'is_unique' => 'Employee ID already exists'
                 ]
             ],
             'email' => [
-                'rules' => 'required|valid_email|is_not_unique[accounts.email]',
+                'rules' => 'required|valid_email|is_unique[accounts.email]',
                 'errors' => [
                     'required' => 'Email is required',
                     'valid_email' => 'Email is not valid',
-                    'is_not_unique' => 'Email already exists'
+                    'is_unique' => 'Email already exists'
                 ]
             ],
-            'password' => [
-                'rules' => 'required|min_length[8]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/]',
-                'errors' => [
-                    'required' => 'Password is required',
-                    'min_length' => 'Password must be at least 8 characters long',
-                    'max_length' => 'Password cannot exceed 20 characters',
-                    'regex_match' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-                ]
-            ]
         ]);
         if(!$validation)
         {
@@ -275,11 +280,11 @@ class Administrator extends BaseController
         {
             $data = [
                 "employee_id"  =>$this->request->getPost('employee_id'),
-                "password"     =>Hash::make($this->request->getPost('password')),
+                "password"     =>Hash::make('Abc12345?'),
                 "fullname"     =>$this->request->getPost('fullname'),
                 "email"        =>$this->request->getPost('email'),  
                 "role"         =>$this->request->getPost('role'),
-                "status"       =>1,
+                "status"       =>$this->request->getPost('status'),
                 "token"        =>md5(uniqid(rand(), true)),
                 "date_created" =>date('Y-m-d h:i:s a')
             ];
@@ -294,6 +299,127 @@ class Administrator extends BaseController
                     ];      
             $logModel->save($data);
             return $this->response->setJSON(['success' => 'Account created successfully!']);
+        }
+    }
+
+    public function saveCadet()
+    {
+        $studentModel = new \App\Models\studentModel();
+        $cadetModel = new \App\Models\cadetModel();
+        $validation = $this->validate([
+            'lastname' => 'required|min_length[2]|max_length[100]',
+            'firstname' => 'required|min_length[2]|max_length[100]',
+            'student_no' => 'required|min_length[8]|max_length[15]|is_unique[students.school_id]',
+            'house_no' => 'required|max_length[50]',
+            'street' => 'required|max_length[100]',
+            'village' => 'required|max_length[100]',
+            'municipality' => 'required|max_length[100]',
+            'province' => 'required|max_length[100]',
+            'course' => 'required|max_length[100]',
+            'year_level' => 'required',
+            'section' => 'required|max_length[50]',
+            'birth_date' => 'required|valid_date',
+            'height' => 'required|decimal',
+            'weight' => 'required|decimal',
+            'blood_type' => 'required|max_length[5]',
+            'gender' => 'required|in_list[Male,Female]',
+            'religion' => 'required|max_length[100]',
+            'contact_no' => 'required|numeric|min_length[10]|max_length[15]',
+            'fb_account' => 'required|valid_url|max_length[150]',
+            'email' => 'required|valid_email|max_length[150]',
+            'emergency_contact' => 'required|max_length[150]',
+            'emergency_house_no' => 'required|max_length[50]',
+            'emergency_street' => 'required|max_length[100]',
+            'emergency_village' => 'required|max_length[100]',
+            'emergency_municipality' => 'required|max_length[100]',
+            'emergency_province' => 'required|max_length[100]',
+            'relationship' => 'required|max_length[50]',
+            'emergency_contact_no' => 'required|numeric|min_length[10]|max_length[15]',
+            'emergency_email' => 'required|valid_email|max_length[150]',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            if(empty($this->request->getPost('mother_sname'))||
+                empty($this->request->getPost('father_sname'))||
+                empty($this->request->getPost('mother_fname'))||
+                empty($this->request->getPost('father_sname')))
+            {
+                $error = ['parents'=>"Please enter your parent's information"];
+                return $this->response->SetJSON(['error' => $error]);
+            }
+            else
+            {
+                $token = bin2hex(random_bytes(32));
+                $data =  ['school_id'=>$this->request->getPost('student_no'),
+                        'password'=>Hash::make('Abc12345?'),
+                        'first_name'=>$this->request->getPost('firstname'),
+                        'middle_name'=>$this->request->getPost('middlename'),
+                        'surname'=>$this->request->getPost('lastname'),
+                        'suffix'=>$this->request->getPost('suffix'),
+                        'email'=>$this->request->getPost('email'),
+                        'status'=>1,
+                        'is_enroll'=>1,
+                        'photo'=>'',
+                        'token'=>$token,
+                        'date_created'=>date('Y-m-d H:i:s a')
+                        ];
+                $studentModel->save($data);
+                //get the student ID
+                $student = $studentModel->WHERE('school_id',$this->request->getPost('student_no'))->first();
+                //cadet information
+                $record = ['student_id'=>$student['student_id'],
+                            'school_id'=>$this->request->getPost('student_no'),
+                            'first_name'=>$this->request->getPost('firstname'),
+                            'middle_name'=>$this->request->getPost('middlename'),
+                            'surname'=>$this->request->getPost('lastname'),
+                            'suffix'=>$this->request->getPost('suffix'),
+                            'house_no'=>$this->request->getPost('house_no'),
+                            'street'=>$this->request->getPost('street'),
+                            'village'=>$this->request->getPost('village'),
+                            'municipality'=>$this->request->getPost('municipality'),
+                            'province'=>$this->request->getPost('province'),
+                            'course'=>$this->request->getPost('course'),
+                            'year'=>$this->request->getPost('year_level'),
+                            'section'=>$this->request->getPost('section'),
+                            'school_attended'=>$this->request->getPost('last_school'),
+                            'birthdate'=>$this->request->getPost('birth_date'),
+                            'height'=>$this->request->getPost('height'),
+                            'weight'=>$this->request->getPost('weight'),
+                            'blood_type'=>$this->request->getPost('blood_type'),
+                            'gender'=>$this->request->getPost('gender'),
+                            'religion'=>$this->request->getPost('religion'),
+                            'contact_no'=>$this->request->getPost('contact_no'),
+                            'fb_account'=>$this->request->getPost('fb_account'),
+                            'email'=>$this->request->getPost('email'),
+                            'mother_sname'=>$this->request->getPost('mother_sname'),
+                            'mother_fname'=>$this->request->getPost('mother_fname'),
+                            'mother_mname'=>$this->request->getPost('mother_mname'),
+                            'mother_contact'=>$this->request->getPost('mother_contact'),
+                            'mother_work'=>$this->request->getPost('mother_work'),
+                            'father_sname'=>$this->request->getPost('father_sname'),
+                            'father_fname'=>$this->request->getPost('father_fname'),
+                            'father_mname'=>$this->request->getPost('father_mname'),
+                            'father_contact'=>$this->request->getPost('father_contact'),
+                            'father_work'=>$this->request->getPost('father_work'),
+                            'emergency_contact'=>$this->request->getPost('emergency_contact'),
+                            'emergency_house_no'=>$this->request->getPost('emergency_house_no'),
+                            'emergency_street'=>$this->request->getPost('emergency_street'),
+                            'emergency_village'=>$this->request->getPost('emergency_village'),
+                            'emergency_municipality'=>$this->request->getPost('emergency_municipality'),
+                            'emergency_province'=>$this->request->getPost('emergency_province'),
+                            'relationship'=>$this->request->getPost('relationship'),
+                            'emergency_contact_no'=>$this->request->getPost('emergency_contact_no'),
+                            'emergency_email'=>$this->request->getPost('emergency_email'),
+                            'token'=>$token,
+                            'date_created'=>date('Y-m-d')];
+                $cadetModel->save($record);
+                return $this->response->SetJSON(['success' => 'Successfully saved']);
+            }
         }
     }
 }

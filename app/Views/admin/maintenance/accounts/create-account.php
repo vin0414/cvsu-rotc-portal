@@ -120,7 +120,7 @@
                                         <div class="col-lg-12">
                                             <label class="form-label">Account Status</label>
                                             <div class="form-selectgroup-boxes row mb-3">
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="status" value="1"
                                                             class="form-selectgroup-input" checked />
@@ -136,7 +136,7 @@
                                                         </span>
                                                     </label>
                                                 </div>
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="status" value="0"
                                                             class="form-selectgroup-input" />
@@ -211,6 +211,43 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmAccount').on('submit', function(e) {
+        e.preventDefault();
+         $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-account')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('accounts')?>";
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

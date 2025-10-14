@@ -101,7 +101,7 @@
                     </li>
                     <?php if($role['cadet']==1): ?>
                     <li class="nav-item <?= ($title == 'Cadets') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('cadet-information')?>">
+                        <a class="nav-link" href="<?=site_url('cadets')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
@@ -114,8 +114,8 @@
                     </li>
                     <?php endif; ?>
                     <?php if($role['schedule']==1): ?>
-                    <li class="nav-item <?= ($title == 'Training Schedule') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('training-schedule')?>">
+                    <li class="nav-item <?= ($title == 'Schedules') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?=site_url('schedules')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -134,7 +134,7 @@
                                 <path d="M7.01 17h.005" />
                                 <path d="M10.01 17h.005" />
                             </svg>
-                            <span class="nav-link-title">&nbsp;Training Schedule </span>
+                            <span class="nav-link-title">&nbsp;Schedules </span>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -159,7 +159,7 @@
                     <?php endif; ?>
                     <?php if($role['grading_system']==1): ?>
                     <li class="nav-item <?= ($title == 'Grading System') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('grading-system')?>">
+                        <a class="nav-link" href="<?=site_url('grades')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -173,7 +173,7 @@
                                 <path d="M4 12l4 2l0 4.75" />
                                 <path d="M8 5.25l4 2.25l4 -2.25" />
                             </svg>
-                            <span class="nav-link-title">&nbsp;Grading System </span>
+                            <span class="nav-link-title">&nbsp;Evaluation </span>
                         </a>
                     </li>
                     <?php endif; ?>

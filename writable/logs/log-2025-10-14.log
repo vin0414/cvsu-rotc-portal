@@ -1,0 +1,299 @@
+DEBUG - 2025-10-14 13:34:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-14 13:34:44 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cvsu', 3306, '', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array)
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array, NULL, 'employee_id')
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', Array, Array, 'employee_id')
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(22): CodeIgniter\Controller->validate(Array)
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#12 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#14 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#15 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#16 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#17 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array)
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array, NULL, 'employee_id')
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', Array, Array, 'employee_id')
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(22): CodeIgniter\Controller->validate(Array)
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#16 {main}
+CRITICAL - 2025-10-14 13:34:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: POST, Route: checkAuth]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `accounts`
+WHERE `employee_id` = :employee_id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employee_id', [...])
+ 5 SYSTEMPATH\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employee_id', [...], null, 'employee_id')
+ 6 SYSTEMPATH\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', [...], [...], 'employee_id')
+ 7 SYSTEMPATH\Controller.php(138): CodeIgniter\Validation\Validation->run()
+ 8 APPPATH\Controllers\Administrator.php(22): CodeIgniter\Controller->validate([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+ERROR - 2025-10-14 13:35:10 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cvsu', 3306, '', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array)
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array, NULL, 'employee_id')
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', Array, Array, 'employee_id')
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(22): CodeIgniter\Controller->validate(Array)
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#12 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#14 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#15 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#16 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#17 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#3 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array)
+#5 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employ...', Array, NULL, 'employee_id')
+#6 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', Array, Array, 'employee_id')
+#7 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#8 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\app\Controllers\Administrator.php(22): CodeIgniter\Controller->validate(Array)
+#9 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+#10 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+#11 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\Users\Warvin\OneDrive\Desktop\My_Files\cvsu-rotc-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#16 {main}
+CRITICAL - 2025-10-14 13:35:10 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+[Method: POST, Route: checkAuth]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `accounts`
+WHERE `employee_id` = :employee_id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('EMP-00001', 'accounts.employee_id', [...])
+ 5 SYSTEMPATH\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('EMP-00001', 'accounts.employee_id', [...], null, 'employee_id')
+ 6 SYSTEMPATH\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('employee_id', 'employee_id', 'EMP-00001', [...], [...], 'employee_id')
+ 7 SYSTEMPATH\Controller.php(138): CodeIgniter\Validation\Validation->run()
+ 8 APPPATH\Controllers\Administrator.php(22): CodeIgniter\Controller->validate([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->checkAuth()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 13:35:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:35:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-14 13:41:29 --> ErrorException: Undefined array key "schedules"
+[Method: GET, Route: schedules]
+in APPPATH\Controllers\Administrator.php on line 113.
+ 1 APPPATH\Controllers\Administrator.php(113): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "schedules"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 113)
+ 2 APPPATH\Controllers\Administrator.php(147): App\Controllers\Administrator->hasPermission('schedules')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->trainingSchedule()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 13:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:42:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:42:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:44:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:44:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:44:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:45:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:48:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:49:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:50:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:50:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:50:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:50:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 13:59:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:05:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:06:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:06:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-14 14:06:29 --> ErrorException: Undefined array key "roster"
+[Method: GET, Route: fetch-permission]
+in APPPATH\Controllers\Administrator.php on line 246.
+ 1 APPPATH\Controllers\Administrator.php(246): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "roster"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 246)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 14:06:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-14 14:06:36 --> ErrorException: Undefined array key "roster"
+[Method: GET, Route: fetch-permission]
+in APPPATH\Controllers\Administrator.php on line 246.
+ 1 APPPATH\Controllers\Administrator.php(246): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "roster"', 'C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\app\\Controllers\\Administrator.php', 246)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->fetchPermission()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 14:07:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:07:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:16:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:17:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:17:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-14 14:17:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/maintenance/accounts/edit-permission.php"
+[Method: GET, Route: maintenance/edit-permission/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/maintenance/accounts/edit-permission.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('admin/maintenance/accounts/edit-permission', [], true)
+ 3 APPPATH\Controllers\Administrator.php(317): view('admin/maintenance/accounts/edit-permission', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->editPermission('1')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 14:17:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:18:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:18:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:18:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:19:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:19:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:19:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:19:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:21:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:22:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:22:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:23:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:23:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:24:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:26:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:31:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:34:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:34:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:35:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:36:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:36:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:37:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:37:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:37:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:37:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:38:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:38:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:39:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:39:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:40:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:43:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:44:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-14 14:44:18 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/announcement.php"
+[Method: GET, Route: announcement]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/announcement.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('admin/announcement', [], true)
+ 3 APPPATH\Controllers\Administrator.php(197): view('admin/announcement', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Administrator->announcement()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Administrator))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\My_Files\\cvsu-rotc-portal\\public\\index.php')
+DEBUG - 2025-10-14 14:44:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:46:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:46:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:46:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 22:47:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-14 14:47:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

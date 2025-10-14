@@ -103,6 +103,24 @@ class Administrator extends BaseController
         return view('auth/forgot-password',['validation' => \Config\Services::validation()]);
     }
 
+    //validate the permission
+    public function hasPermission($page)
+    {
+        $roleModel = new \App\Models\roleModel();
+        $accountModel = new \App\Models\accountModel();
+        $account = $accountModel->WHERE('account_id',session()->get('loggedAdmin'))->first();
+        $role = $roleModel->WHERE('role_id',$account['role_id'])->first();
+        if($role[$page] != 1)
+        {
+            //no access
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public function index()
     {
         $title = 'Overview';
@@ -112,103 +130,217 @@ class Administrator extends BaseController
 
     public function cadetInformation()
     {
-        $title = 'Cadets';
-        //students
-        $studentModel = new \App\Models\studentModel();
-        $students = $studentModel->WHERE('status',1)->findAll();
-
-        $data = ['title'=>$title,'students'=>$students];
-        return view('admin/cadet-information',$data);
-    }
-
-    public function cadetView($id)
-    {
-        $title = "View";
-        $cadetModel = new \App\Models\cadetModel();
-        $cadet = $cadetModel->WHERE('school_id',$id)->first();
-
-        $data = ['title'=>$title,'cadet'=>$cadet];
-        return view('admin/cadet-view',$data);
+        if(!$this->hasPermission('cadet'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Cadets';
+            $data['title'] = $title;
+            return view('admin/cadets/cadet-list',$data);
+        }
     }
 
     public function trainingSchedule()
     {
-        $title = 'Training Schedule';
-        $data = ['title'=>$title];
-        return view('admin/training-schedule',$data);
+        if(!$this->hasPermission('schedule'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Schedules';
+            $data = ['title'=>$title];
+            return view('admin/schedules/all-schedules',$data);
+        }
     }
 
     public function attendance()
     {
-        $title = 'Attendance';
-        $data = ['title'=>$title];
-        return view('admin/attendance',$data);
+        if(!$this->hasPermission('attendance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Attendance';
+            $data = ['title'=>$title];
+            return view('admin/attendance/all-attendance',$data);
+        }
+    }
+
+    public function gradingSystem()
+    {
+        if(!$this->hasPermission('grading_system'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Grading System';
+            $data = ['title'=>$title];
+            return view('admin/grades/index',$data);
+        }
     }
 
     public function announcement()
     {
-        $title = 'Announcement';
+        if(!$this->hasPermission('announcement'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Announcement';
+            $data = ['title'=>$title];
+            return view('admin/announcement/index',$data);
+        }
+    }
+
+    public function report()
+    {
+        $title = 'Reports';
         $data = ['title'=>$title];
-        return view('admin/announcement',$data);
+        return view('admin/reports/index',$data);
     }
 
     public function accounts()
     {
-        $title = 'Accounts';
-        $data = ['title'=>$title];
-        return view('admin/maintenance/accounts/manage-user',$data);
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Accounts';
+            $data = ['title'=>$title];
+            return view('admin/maintenance/accounts/manage-user',$data);
+        }
     }
 
     public function createAccount()
     {
-        $title = 'Create Account';
-        $data = ['title'=>$title];
-        return view('admin/maintenance/accounts/create-account',$data);
-    }
-
-    public function register()
-    {
-        $title = "Register";
-        //recent cadets
-        $cadetModel = new \App\Models\cadetModel();
-        $cadet = $cadetModel->orderBy('cadet_id','DESC')->limit(5)->findAll();
-
-        $data = ['title'=>$title,'cadet'=>$cadet];
-        return view('admin/register-cadet',$data);
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Create Account';
+            $data = ['title'=>$title];
+            return view('admin/maintenance/accounts/create-account',$data);
+        }
     }
 
     public function recovery()
     {
-        $title = 'Back-up and Recovery';
-        $data = ['title'=>$title];
-        return view('admin/maintenance/others/recovery',$data);
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Back-up and Recovery';
+            $data = ['title'=>$title];
+            return view('admin/maintenance/others/recovery',$data);
+        }
     }
 
     public function fetchPermission()
     {
-        $roleModel = new \App\Models\roleModel();
-        $roles = $roleModel->findAll();
-        $totalRecords = $roleModel->countAllResults();
+        $searchTerm = $_GET['search']['value'] ?? '';
+        $permissionModel = new \App\Models\roleModel();
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $permissionModel->like('role_name', $searchTerm);   
+        }
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredPermissionModel = clone $permissionModel;
+        if ($searchTerm) {
+            $filteredPermissionModel->like('role_name', $searchTerm);
+        }
+        // Fetch filtered records based on limit and offset
+        $permissions = $permissionModel->findAll($limit, $offset);  
+        // Count total records (without filter)
+        $totalRecords = $permissionModel->countAllResults();
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredPermissionModel->countAllResults();
         $response = [
-            "draw" => intval($_GET['draw']),
+            "draw" => $_GET['draw'],
             "recordsTotal" => $totalRecords,
-            "recordsFiltered" => $totalRecords,
-            "data" => $roles
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
         ];
+        foreach ($permissions as $row) {
+            $response['data'][] = [
+                'role_name' => htmlspecialchars($row['role_name'], ENT_QUOTES),
+                'cadet' => ($row['cadet']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'schedule' => ($row['schedule']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'attendance' => ($row['attendance']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'grading_system' => ($row['grading_system']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',       
+                'announcement' => ($row['announcement']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'maintenance' => ($row['maintenance']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'action' => '<a class="btn btn-primary edit_permission" href="/maintenance/edit-permission/' . $row['role_id'] . '"><i class="ti ti-edit"></i> Edit </a>'
+            ];
+        }
         return $this->response->setJSON($response);
+        
     }
 
     public function settings()
     {
-        $title = 'Settings';
-        //logs
-        $builder = $this->db->table('logs a');
-        $builder->select('a.*,b.fullname');
-        $builder->join('accounts b','b.account_id=a.account_id','LEFT');
-        $logs = $builder->get()->getResult();
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Settings';
+            //logs
+            $builder = $this->db->table('logs a');
+            $builder->select('a.*,b.fullname');
+            $builder->join('accounts b','b.account_id=a.account_id','LEFT');
+            $logs = $builder->get()->getResult();
 
-        $data = ['title'=>$title,'logs'=>$logs];
-        return view('admin/maintenance/others/settings',$data);
+            $data = ['title'=>$title,'logs'=>$logs];
+            return view('admin/maintenance/others/settings',$data);
+        }
+    }
+
+    public function createPermission()
+    {
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $data['title'] = 'Create Permission';
+            return view('admin/maintenance/others/add-permission',$data);
+        }
+    }
+
+    public function editPermission($id)
+    {
+        if(!$this->hasPermission('maintenance') || !is_numeric($id))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $data['title'] = 'Edit Permission';
+            $permission = (new \App\Models\roleModel())->WHERE('role_id',$id)->first();
+            if(!$permission)
+            {
+                return redirect()->to('/maintenance/settings')->with('fail', 'Permission not found!');
+            }
+            $data['permission'] = $permission;
+            return view('admin/maintenance/others/edit-permission',$data);
+        }
     }
 
     public function myAccount()

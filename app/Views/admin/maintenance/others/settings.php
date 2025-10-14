@@ -37,6 +37,15 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <a href="<?=site_url('maintenance/permission/create')?>" class="btn btn-primary">
+                                    <i class="ti ti-plus"></i> Create
+                                </a>
+                            </div>
+                            <!-- BEGIN MODAL -->
+                            <!-- END MODAL -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,6 +53,11 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                    <div class="alert alert-important alert-danger alert-dismissible" role="alert">
+                        <?= session()->getFlashdata('fail'); ?>
+                    </div>
+                    <?php endif; ?>
                     <div class="card">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
@@ -140,75 +154,44 @@
     <script>
     $('#tbl_logs').DataTable();
     let permission = $('#user_permission').DataTable({
-        ajax: '<?=site_url('fetch-Permission')?>',
-        columns: [{
-                data: 'role_name'
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('fetch-permission')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
+            },
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "role_name"
             },
             {
-                data: 'cadet',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "cadet"
             },
             {
-                data: 'schedules',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "schedule"
             },
             {
-                data: 'attendance',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "attendance"
             },
             {
-                data: 'grading',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "grading_system"
             },
             {
-                data: 'announcement',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "announcement"
             },
             {
-                data: 'maintenance',
-                render: function(data, type, row) {
-                    if (data == 1) {
-                        return `<input class="form-check-input" type="checkbox" checked disabled>`;
-                    } else {
-                        return `<input class="form-check-input" type="checkbox" disabled>`;
-                    }
-                }
+                "data": "maintenance"
             },
             {
-                data: null,
-                render: function(data, type, row) {
-                    return `<button class="btn btn-sm btn-primary edit_permission" data-id="${row.role_id}"><i class="ti ti-edit"></i>&nbsp;Edit</button>`;
-                }
+                "data": "action"
             }
         ]
     });

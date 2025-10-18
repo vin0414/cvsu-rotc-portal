@@ -27,8 +27,11 @@ $routes->get('sign-out','Administrator::logout');
 $routes->get('download','Download::downloadFile');
 $routes->post('restore','Restore::restoreFile');
 //ajax
+$routes->post('save-announcement','Administrator::saveAnnouncement');
+$routes->post('edit-announcement','Administrator::modifyAnnouncement');
 $routes->get('fetch-account','Administrator::fetchAccount');
 $routes->post('save-account','Administrator::saveAccount');
+$routes->post('edit-account','Administrator::modifyAccount');
 $routes->get('fetch-permission','Administrator::fetchPermission');
 $routes->post('save-permission','Administrator::savePermission');
 $routes->post('edit-permission','Administrator::modifyPermission');
@@ -49,7 +52,9 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     //grades
     $routes->get('grades','Administrator::gradingSystem');
     //announcement
-    $routes->get('announcement','Administrator::announcement');
+    $routes->match(['get','post'],'announcement','Administrator::announcement');
+    $routes->get('announcement/create','Administrator::createAnnouncement');
+    $routes->get('announcement/edit/(:any)','Administrator::editAnnouncement/$1');
     //reports
     $routes->get('reports','Administrator::report');
     //maintenance

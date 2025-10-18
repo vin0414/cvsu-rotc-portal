@@ -192,9 +192,128 @@ class Administrator extends BaseController
         }
         else
         {
-            $title = 'Announcement';
-            $data = ['title'=>$title];
+            $data['title']='Announcement';
+            $val = $this->request->getGet('search');
+            $announcement = new \App\Models\announcementModel();
+            $page = (int) ($this->request->getGet('page') ?? 1);
+            $perPage = 6;
+
+            // Build query
+            if ($val) {
+                if ($val) $announcement->like('title', $val);
+            }
+
+            $announcement->orderBy('announcement_id', 'DESC');
+            $list = $announcement->paginate($perPage, 'default', $page);
+            $total = $announcement->countAllResults();       
+            $pager = $announcement->pager;
+            $data['list']=$list;
+            $data['page']=$page;
+            $data['perPage']=$perPage;
+            $data['total']=$total;
+            $data['pager']=$pager;
             return view('admin/announcement/index',$data);
+        }
+    }
+
+    public function createAnnouncement()
+    {
+        if(!$this->hasPermission('announcement'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'New Announcement';
+            $data = ['title'=>$title];
+            return view('admin/announcement/create',$data);
+        }
+    }
+
+    public function saveAnnouncement()
+    {
+        // Get raw HTML from Quill editor
+        $rawDetails = $this->request->getPost('details');
+
+        // Sanitize: remove whitespace and check for empty Quill output
+        $cleanDetails = trim($rawDetails);
+
+        $validation = $this->validate([
+            'title'=>[
+                'rules'=>'required|is_unique[announcement.title]',
+                'errors'=>[
+                    'required'=>'Title is required',
+                    'is_unique'=>'Title already exist. Please try again'
+                ]
+            ],
+            'details'=>['rules'=>'required','errors'=>['required'=>'Details is required']],
+            'file' => [
+                'rules' => 'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]',
+                'errors' => [
+                    'uploaded' => 'Please upload a file before submitting.',
+                    'mime_in' => 'Only JPG, JPEG, and PNG image formats are allowed.',
+                    'max_size' => 'The file size must not exceed 10MB.',
+                ]
+            ],
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            if ($cleanDetails === '<p><br></p>' || $cleanDetails === '') 
+            {
+                $error = ['details'=>'Details is required'];
+                return $this->response->setJSON(['errors'=>$error]);
+            }
+            else
+            {
+                $file = $this->request->getFile('file');
+                if ($file && $file->isValid() && !$file->hasMoved()) 
+                {
+                    $extension = $file->getExtension();
+                    $originalname  = pathinfo($file->getClientName(), PATHINFO_FILENAME);
+                    $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalname);
+                    $newName = date('YmdHis') . '_' . $safeName . '.' . $extension;
+                    //create folder
+                    $folderName = "assets/images/announcement";
+                    if (!is_dir($folderName)) {
+                        mkdir($folderName, 0755, true);
+                    }
+                    $file->move($folderName.'/',$newName);
+                    $announcementModel = new \App\Models\announcementModel();
+                    //save to the database
+                    $data = [
+                            'title'=>$this->request->getPost('title'),
+                            'details'=>$this->request->getPost('details'),
+                            'image'=>$newName,
+                            'account_id'=>session()->get('loggedAdmin'),
+                            ];
+                    $announcementModel->save($data);
+                    return $this->response->setJSON(['success'=>'Successfully uploaded']);
+                }
+                else
+                {
+                    $errors = ['file'=>'File upload failed or no file selected.'];
+                    return $this->response->setJSON(['errors'=>$errors]);
+                }
+            }
+        }
+    }
+
+    public function editAnnouncement($id)
+    {
+        if(!$this->hasPermission('announcement'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Edit Announcement';
+            $data = ['title'=>$title];
+            return view('admin/announcement/edit',$data);
         }
     }
 
@@ -246,7 +365,10 @@ class Administrator extends BaseController
             $title = 'Edit Account';
             $roleModel = new \App\Models\roleModel();
             $role = $roleModel->findAll();
-            $data = ['title'=>$title,'role'=>$role];
+            //account
+            $accountModel = new \App\Models\accountModel();
+            $account = $accountModel->where('account_id',$id)->first();
+            $data = ['title'=>$title,'role'=>$role,'account'=>$account];
             return view('admin/maintenance/accounts/edit-account',$data);
         }
     }
@@ -538,6 +660,69 @@ class Administrator extends BaseController
                     ];      
             $logModel->save($data);
             return $this->response->setJSON(['success' => 'Account created successfully!']);
+        }
+    }
+
+    public function modifyAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $validation = $this->validate([
+            'id'=>[
+                'rules'=>'required|numeric',
+                'errors'=>[
+                    'required'=>'Account ID is required',
+                    'numeric'=>'Account ID is numeric'
+                ]
+            ],
+            'fullname' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Fullname is required',
+                ]
+            ],
+            'employee_id' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Employee ID is required',
+                ]
+            ],
+            'email' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Email is required',
+                    'valid_email' => 'Email is not valid',
+                ]
+            ],
+            'role'=>[
+                'rules'=>'required',
+                'errors'=>['Role is required']
+            ],
+        ]);
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = [
+                "employee_id"  =>$this->request->getPost('employee_id'),
+                "password"     =>Hash::make('Abc12345?'),
+                "fullname"     =>$this->request->getPost('fullname'),
+                "email"        =>$this->request->getPost('email'),  
+                "role_id"         =>$this->request->getPost('role'),
+                "status"       =>$this->request->getPost('status'),
+            ];
+            $accountModel->update($this->request->getPost('id'),$data);
+            //logs  
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedAdmin'),
+                    'activities'=>'Modify Account',
+                    'page'=>'Create Account page',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->setJSON(['success' => 'Account modified successfully!']);
         }
     }
 

@@ -30,6 +30,8 @@ $routes->post('restore','Restore::restoreFile');
 $routes->get('fetch-account','Administrator::fetchAccount');
 $routes->post('save-account','Administrator::saveAccount');
 $routes->get('fetch-permission','Administrator::fetchPermission');
+$routes->post('save-permission','Administrator::savePermission');
+$routes->post('edit-permission','Administrator::modifyPermission');
 
 $routes->group('',['filter'=>'AdminCheck'],function($routes)
 {
@@ -52,12 +54,12 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     $routes->get('reports','Administrator::report');
     //maintenance
     $routes->get('maintenance/accounts','Administrator::accounts');
-    $routes->get('maintenance/create-account','Administrator::createAccount');
-    $routes->get('maintenance/edit-account/(:any)','Administrator::editAccount/$1');
+    $routes->get('maintenance/accounts/create','Administrator::createAccount');
+    $routes->get('maintenance/accounts/edit/(:any)','Administrator::editAccount/$1');
     $routes->get('maintenance/recovery','Administrator::recovery');
     $routes->get('maintenance/settings','Administrator::settings');
     $routes->get('maintenance/permission/create','Administrator::createPermission');
-    $routes->get('maintenance/edit-permission/(:any)','Administrator::editPermission/$1');
+    $routes->get('maintenance/permission/edit/(:any)','Administrator::editPermission/$1');
     //profile
     $routes->get('my-account','Administrator::myAccount');
 });

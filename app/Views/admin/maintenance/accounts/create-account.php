@@ -39,7 +39,7 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('accounts')?>"
+                                <a href="<?=site_url('maintenance/accounts')?>"
                                     class="btn btn-default text-success btn-5 d-none d-sm-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -52,7 +52,7 @@
                                     </svg>
                                     Back
                                 </a>
-                                <a href="<?=site_url('accounts')?>"
+                                <a href="<?=site_url('maintenance/accounts')?>"
                                     class="btn btn-default text-success btn-6 d-sm-none btn-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -108,9 +108,10 @@
                                                     <label class="form-label">System Role</label>
                                                     <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
-                                                        <option>Super-admin</option>
-                                                        <option>Moderator</option>
-                                                        <option>Standard-user</option>
+                                                        <?php foreach($role as $row): ?>
+                                                        <option value="<?=$row['role_id']?>"><?=$row['role_name']?>
+                                                        </option>
+                                                        <?php endforeach;?>
                                                     </select>
                                                     <div id="role-error" class="error-message text-danger text-sm">
                                                     </div>
@@ -214,7 +215,7 @@
     <script>
     $('#frmAccount').on('submit', function(e) {
         e.preventDefault();
-         $('.error-message').html('');
+        $('.error-message').html('');
         let data = $(this).serialize();
         $.ajax({
             url: "<?=site_url('save-account')?>",
@@ -231,7 +232,7 @@
                         // Action based on user's choice
                         if (result.isConfirmed) {
                             // Perform some action when "Yes" is clicked
-                            location.href = "<?=base_url('accounts')?>";
+                            location.href = "<?=base_url('maintenance/accounts')?>";
                         }
                     });
                 } else {

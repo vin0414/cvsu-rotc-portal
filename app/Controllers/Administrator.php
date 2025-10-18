@@ -228,8 +228,26 @@ class Administrator extends BaseController
         else
         {
             $title = 'Create Account';
-            $data = ['title'=>$title];
+            $roleModel = new \App\Models\roleModel();
+            $role = $roleModel->findAll();
+            $data = ['title'=>$title,'role'=>$role];
             return view('admin/maintenance/accounts/create-account',$data);
+        }
+    }
+
+    public function editAccount($id)
+    {
+        if(!$this->hasPermission('maintenance'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Edit Account';
+            $roleModel = new \App\Models\roleModel();
+            $role = $roleModel->findAll();
+            $data = ['title'=>$title,'role'=>$role];
+            return view('admin/maintenance/accounts/edit-account',$data);
         }
     }
 
@@ -284,11 +302,96 @@ class Administrator extends BaseController
                 'grading_system' => ($row['grading_system']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',       
                 'announcement' => ($row['announcement']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
                 'maintenance' => ($row['maintenance']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
-                'action' => '<a class="btn btn-primary edit_permission" href="/maintenance/edit-permission/' . $row['role_id'] . '"><i class="ti ti-edit"></i> Edit </a>'
+                'action' => '<a class="btn btn-primary edit_permission" href="/maintenance/permission/edit/' . $row['role_id'] . '"><i class="ti ti-edit"></i> Edit </a>'
             ];
         }
         return $this->response->setJSON($response);
         
+    }
+
+    public function savePermission()
+    {
+        $validation = $this->validate([
+            'role'=>['rules'=>'required|is_unique[roles.role_name]','errors'=>['required'=>'Role is required.','is_unique'=>'Role already exist. Please try again']],
+            'cadet'=>['rules'=>'required','errors'=>['required'=>'Cadet Module is required']],
+            'schedule'=>['rules'=>'required','errors'=>['required'=>'Schedule Module is required']],
+            'attendance'=>['rules'=>'required','errors'=>['required'=>'Attendance Module is required']],
+            'grade'=>['rules'=>'required','errors'=>['required'=>'Evaluation Module is required']],
+            'announcement'=>['rules'=>'required','errors'=>['required'=>'Announcement Module is required']],
+            'maintenance'=>['rules'=>'required','errors'=>['required'=>'Maintenance Module is required']],
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            $roleModel = new \App\Models\roleModel();
+            $data = [
+                    'role_name'=>$this->request->getPost('role'),
+                    'cadet'=>$this->request->getPost('cadet'),
+                    'schedule'=>$this->request->getPost('schedule'),
+                    'attendance'=>$this->request->getPost('attendance'),
+                    'grading_system'=>$this->request->getPost('grade'),
+                    'announcement'=>$this->request->getPost('announcement'),
+                    'maintenance'=>$this->request->getPost('maintenance')
+                ];
+            $roleModel->save($data);
+            //logs  
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedAdmin'),
+                    'activities'=>'Created new permission',
+                    'page'=>'Settings page',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->setJSON(['success'=>'Successfully added']);
+        }
+    }
+
+    public function modifyPermission()
+    {
+        $validation = $this->validate([
+            'id'=>['rules'=>'required','errors'=>['Role ID is required']],
+            'role'=>['rules'=>'required','errors'=>['required'=>'Role is required.']],
+            'cadet'=>['rules'=>'required','errors'=>['required'=>'Cadet Module is required']],
+            'schedule'=>['rules'=>'required','errors'=>['required'=>'Schedule Module is required']],
+            'attendance'=>['rules'=>'required','errors'=>['required'=>'Attendance Module is required']],
+            'grade'=>['rules'=>'required','errors'=>['required'=>'Evaluation Module is required']],
+            'announcement'=>['rules'=>'required','errors'=>['required'=>'Announcement Module is required']],
+            'maintenance'=>['rules'=>'required','errors'=>['required'=>'Maintenance Module is required']],
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            $roleModel = new \App\Models\roleModel();
+            $data = [
+                    'role_name'=>$this->request->getPost('role'),
+                    'cadet'=>$this->request->getPost('cadet'),
+                    'schedule'=>$this->request->getPost('schedule'),
+                    'attendance'=>$this->request->getPost('attendance'),
+                    'grading_system'=>$this->request->getPost('grade'),
+                    'announcement'=>$this->request->getPost('announcement'),
+                    'maintenance'=>$this->request->getPost('maintenance')
+                ];
+            $roleModel->update($this->request->getPost('id'),$data);
+            //logs  
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedAdmin'),
+                    'activities'=>'Modify permission',
+                    'page'=>'Settings page',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->setJSON(['success'=>'Successfully saved changes']);
+        }
     }
 
     public function settings()
@@ -403,6 +506,10 @@ class Administrator extends BaseController
                     'is_unique' => 'Email already exists'
                 ]
             ],
+            'role'=>[
+                'rules'=>'required',
+                'errors'=>['Role is required']
+            ],
         ]);
         if(!$validation)
         {
@@ -415,7 +522,7 @@ class Administrator extends BaseController
                 "password"     =>Hash::make('Abc12345?'),
                 "fullname"     =>$this->request->getPost('fullname'),
                 "email"        =>$this->request->getPost('email'),  
-                "role"         =>$this->request->getPost('role'),
+                "role_id"         =>$this->request->getPost('role'),
                 "status"       =>$this->request->getPost('status'),
                 "token"        =>md5(uniqid(rand(), true)),
                 "date_created" =>date('Y-m-d h:i:s a')

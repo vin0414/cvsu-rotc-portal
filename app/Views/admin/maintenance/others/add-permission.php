@@ -71,7 +71,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="cadet" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -109,7 +109,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="schedule" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -147,7 +147,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="attendance" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -189,7 +189,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="grade" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -227,7 +227,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="announcement" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -266,7 +266,7 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
                                                         <input type="radio" name="maintenance" value="1"
-                                                            class="form-selectgroup-input" required />
+                                                            class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
@@ -302,7 +302,17 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary" id="btnCreate">
-                                        <i class="ti ti-check"></i>&nbsp;Create and Save
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                                            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M14 4l0 4l-6 0l0 -4" />
+                                        </svg>
+                                        Create and Save
                                     </button>
                                 </div>
                             </form>
@@ -341,6 +351,44 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmCreate').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-permission')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('maintenance/settings')?>";
+                        }
+                    });
+                } else {
+                    var errors = response.errors;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

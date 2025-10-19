@@ -20,10 +20,10 @@ class cadetModel extends Model
                                     'father_sname','father_fname','father_mname','father_contact','father_work',
                                     'emergency_house_no','emergency_street','emergency_village','emergency_municipality',
                                     'emergency_province','relationship','emergency_contact','emergency_email',
-                                    'token','date_created'];
+                                    'token'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -13,10 +13,10 @@ class studentModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['school_id','password','first_name','middle_name','surname','suffix',
-                                    'email','status','is_enroll','photo','token','date_created'];
+                                    'email','status','is_enroll','photo','token'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Libraries\Hash;
+use Config\Email;
 
 class Home extends BaseController
 {
@@ -129,10 +130,13 @@ class Home extends BaseController
             $hashedPassword = Hash::make($newPassword);
             $studentModel->update($student['student_id'], ['password' => $hashedPassword]); 
             $fullname = $student['first_name'] . ' ' . $student['middle_name'] . ' ' . $student['surname'];
-            // Send email with new password         
+            // Send email with new password       
+            $emailConfig = new Email();
+            $fromEmail = $emailConfig->fromEmail;
+            $fromName  = $emailConfig->fromName;  
             $email = \Config\Services::email();
             $email->setTo($student['email']);
-            $email->setFrom('vinmogate@gmail.com','CvSU-CCC ROTC Unit Portal');
+            $email->setFrom($fromEmail,$fromName);
             $imgURL = "assets/images/logo.png";
             $email->attach($imgURL);
             $cid = $email->setAttachmentCID($imgURL);
@@ -153,13 +157,8 @@ class Home extends BaseController
                 session()->setFlashdata('fail','Failed to send email');
                 return redirect()->to('/forgot-password');
             }
-            // Uncomment the following line to actually send the email
-            // $email->send();
-            // For testing purposes, you can log the email content
             log_message('info', 'Email sent to: ' . $student['email']);
             log_message('info', 'New password: ' . $newPassword);
-            // You can also log the email content to a file or database for debugging
-            // Logic to send email with new password
             session()->setFlashdata('success','New password has been sent to your email');
             return redirect()->to('/forgot-password');
         }

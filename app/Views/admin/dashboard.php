@@ -235,7 +235,7 @@
             ["Date", "Total"],
             <?php 
                     foreach ($enrol as $row){
-                        echo "['".$row->created_date."',".$row->total."],";
+                        echo "['".$row->created_at."',".$row->total."],";
                     }
                     ?>
         ]);

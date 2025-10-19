@@ -44,7 +44,114 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M16 19h6" />
+                                            <path d="M19 16v6" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                                        </svg>
+                                        &nbsp;Newly Registered
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-enrolled-8" class="nav-link" data-bs-toggle="tab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-cog">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" />
+                                            <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M19.001 15.5v1.5" />
+                                            <path d="M19.001 21v1.5" />
+                                            <path d="M22.032 17.25l-1.299 .75" />
+                                            <path d="M17.27 20l-1.3 .75" />
+                                            <path d="M15.97 17.25l1.3 .75" />
+                                            <path d="M20.733 20l1.3 .75" />
+                                        </svg>
+                                        &nbsp;Enrolled Cadets
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-officer-8" class="nav-link" data-bs-toggle="tab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-shield">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h2" />
+                                            <path
+                                                d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        </svg>
+                                        &nbsp;Cadet Officers
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active show" id="tabs-home-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="table1">
+                                            <thead>
+                                                <th>Image</th>
+                                                <th>Surname</th>
+                                                <th>First Name</th>
+                                                <th>M. I.</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-enrolled-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="table2">
+                                            <thead>
+                                                <th>Surname</th>
+                                                <th>First Name</th>
+                                                <th>M. I.</th>
+                                                <th>Course & Year</th>
+                                                <th>Section</th>
+                                                <th>Batch</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-officer-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="table3">
+                                            <thead>
+                                                <th>Surname</th>
+                                                <th>First Name</th>
+                                                <th>M. I.</th>
+                                                <th>Course & Year</th>
+                                                <th>Section</th>
+                                                <th>Position</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -79,6 +186,11 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    let table1 = $('#table1').DataTable();
+    let table2 = $('#table2').DataTable();
+    let table3 = $('#table3').DataTable();
+    </script>
 </body>
 
 </html>

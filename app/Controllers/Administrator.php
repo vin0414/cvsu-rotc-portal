@@ -129,9 +129,9 @@ class Administrator extends BaseController
         $announcement = $announcementModel->orderBy('announcement_id','DESC')->limit(5)->findAll();
         //enrolment chart
         $builder = $this->db->table('students');
-        $builder->select('date_created,COUNT(student_id)total');
+        $builder->select('created_at,COUNT(student_id)total');
         $builder->where('is_enroll',1);
-        $builder->groupBy('date_created');
+        $builder->groupBy('created_at');
         $enrol = $builder->get()->getResult();
 
         $data = ['title'=>$title,'announcement'=>$announcement,'enrol'=>$enrol];

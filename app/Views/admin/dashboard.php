@@ -12,6 +12,12 @@
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('visualization', "1", {
+        packages: ['corechart']
+    });
+    </script>
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -83,8 +89,50 @@
                         </div>
                     </div>
                     <div class="row g-3">
-                        <div class="col-lg-9">
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-star">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h.5" />
+                                            <path
+                                                d="M17.8 20.817l-2.172 1.138a.392 .392 0 0 1 -.568 -.41l.415 -2.411l-1.757 -1.707a.389 .389 0 0 1 .217 -.665l2.428 -.352l1.086 -2.193a.392 .392 0 0 1 .702 0l1.086 2.193l2.428 .352a.39 .39 0 0 1 .217 .665l-1.757 1.707l.414 2.41a.39 .39 0 0 1 -.567 .411l-2.172 -1.138z" />
+                                        </svg>
+                                        Officers
+                                    </div>
+                                </div>
+                                <div class="position-relative">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-chart-bar-popular">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path
+                                                d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path
+                                                d="M15 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path d="M4 20h14" />
+                                        </svg>
+                                        Enrolment Chart
+                                    </div>
+                                    <div id="enrolmentChart" style="height:300px;"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="card">
@@ -104,7 +152,44 @@
                                     </div>
                                 </div>
                                 <div class="position-relative">
-
+                                    <div class="list-group list-group-flush">
+                                        <?php if(empty($announcement)):?>
+                                        <div class="list-group-item">
+                                            <div class="row align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                    <path d="M21 21l-6 -6" />
+                                                </svg>
+                                                No Announcement posted
+                                            </div>
+                                        </div>
+                                        <?php else: ?>
+                                        <?php foreach($announcement as $row): ?>
+                                        <div class="list-group-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <a href="javascript:void(0);">
+                                                        <span class="avatar avatar-1"
+                                                            style="background-image: url(<?=base_url('assets/images/announcement/')?><?=$row['image']?>)">
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-truncate">
+                                                    <a href="javascript:void(0);"
+                                                        class="text-reset d-block"><?=$row['title']?></a>
+                                                    <div class="d-block text-secondary text-truncate mt-n1">
+                                                        <?=$row['details']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endforeach;?>
+                                        <?php endif;?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +227,33 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script>
+    google.charts.setOnLoadCallback(Charts);
+
+    function Charts() {
+        var data = google.visualization.arrayToDataTable([
+            ["Date", "Total"],
+            <?php 
+                    foreach ($enrol as $row){
+                        echo "['".$row->created_date."',".$row->total."],";
+                    }
+                    ?>
+        ]);
+
+        var options = {
+            title: '',
+            legend: {
+                position: 'bottom'
+            },
+            backgroundColor: {
+                fill: 'transparent'
+            },
+        };
+        /* Instantiate and draw the chart.*/
+        var chart = new google.visualization.LineChart(document.getElementById('enrolmentChart'));
+        chart.draw(data, options);
+    }
+    </script>
 </body>
 
 </html>

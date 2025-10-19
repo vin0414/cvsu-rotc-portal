@@ -50,7 +50,7 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     $routes->get('attendance','Administrator::attendance');
     $routes->get('attendance/view/(:any)','Administrator::viewAttendance/$1');
     //grades
-    $routes->get('grades','Administrator::gradingSystem');
+    $routes->get('evaluation','Administrator::gradingSystem');
     //announcement
     $routes->match(['get','post'],'announcement','Administrator::announcement');
     $routes->get('announcement/create','Administrator::createAnnouncement');

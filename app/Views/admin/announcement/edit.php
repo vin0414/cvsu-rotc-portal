@@ -12,6 +12,7 @@
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -58,7 +59,37 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title"><i class="ti ti-edit"></i>&nbsp;<?=$title?></div>
+                            <form method="POST" class="row g-3" enctype="multipart/form-data" id="frmEdit">
+                                <?=csrf_field()?>
+                                <input type="hidden" name="id" value="<?=$announcement['announcement_id']?>" />
+                                <div class="col-lg-12">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="title"
+                                        value="<?=$announcement['title']?>">
+                                    <div id="title-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="form-label">Details</label>
+                                    <div id="editor" class="form-control" style="height:200px;">
+                                        <?=$announcement['details']?></div>
+                                    <div id="details-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="form-label">Attachment</label>
+                                    <input type="file" class="form-control" name="file" />
+                                    <div id="file-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -93,6 +124,53 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+    $('#frmEdit').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        var details = document.querySelector('.ql-editor').innerHTML;
+        $('#frmEdit textarea[name="details"]').remove();
+        $(this).append("<textarea name='details' style='display:none;'>" + details + "</textarea>");
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('edit-announcement')?>",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully saved changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('announcement')?>";
+                        }
+                    });
+                } else {
+                    var errors = response.errors;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

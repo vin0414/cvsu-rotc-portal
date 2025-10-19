@@ -124,7 +124,17 @@ class Administrator extends BaseController
     public function index()
     {
         $title = 'Overview';
-        $data = ['title'=>$title];
+        //announcement
+        $announcementModel = new \App\Models\announcementModel();
+        $announcement = $announcementModel->orderBy('announcement_id','DESC')->limit(5)->findAll();
+        //enrolment chart
+        $builder = $this->db->table('students');
+        $builder->select('date_created,COUNT(student_id)total');
+        $builder->where('is_enroll',1);
+        $builder->groupBy('date_created');
+        $enrol = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'announcement'=>$announcement,'enrol'=>$enrol];
         return view('admin/dashboard',$data);
     }
 
@@ -178,7 +188,7 @@ class Administrator extends BaseController
         }
         else
         {
-            $title = 'Grading System';
+            $title = 'Gradebook';
             $data = ['title'=>$title];
             return view('admin/grades/index',$data);
         }
@@ -303,6 +313,90 @@ class Administrator extends BaseController
         }
     }
 
+    public function modifyAnnouncement()
+    {
+        // Get raw HTML from Quill editor
+        $rawDetails = $this->request->getPost('details');
+
+        // Sanitize: remove whitespace and check for empty Quill output
+        $cleanDetails = trim($rawDetails);
+
+        $validation = $this->validate([
+            'id'=>[
+                'rules'=>'required|numeric',
+                'errors'=>[
+                    'required'=>'Announcement ID is required',
+                    'numeric'=>'Invalid ID'
+                ]
+            ],
+            'title'=>[
+                'rules'=>'required',
+                'errors'=>[
+                    'required'=>'Title is required',
+                ]
+            ],
+            'details'=>['rules'=>'required','errors'=>['required'=>'Details is required']],
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            if ($cleanDetails === '<p><br></p>' || $cleanDetails === '') 
+            {
+                $error = ['details'=>'Details is required'];
+                return $this->response->setJSON(['errors'=>$error]);
+            }
+            else
+            {
+                $file = $this->request->getFile('file');
+                $originalname  = pathinfo($file->getClientName(), PATHINFO_FILENAME);
+                if(empty($originalname))
+                {
+                    $announcementModel = new \App\Models\announcementModel();
+                    //save to the database
+                    $data = [
+                            'title'=>$this->request->getPost('title'),
+                            'details'=>$this->request->getPost('details'),
+                            ];
+                    $announcementModel->update($this->request->getPost('id'),$data);
+                    return $this->response->setJSON(['success'=>'Successfully applied changes']);
+                }
+                else
+                {
+                    if ($file && $file->isValid() && !$file->hasMoved()) 
+                    {
+                        $extension = $file->getExtension();
+                        $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalname);
+                        $newName = date('YmdHis') . '_' . $safeName . '.' . $extension;
+                        //create folder
+                        $folderName = "assets/images/announcement";
+                        if (!is_dir($folderName)) {
+                            mkdir($folderName, 0755, true);
+                        }
+                        $file->move($folderName.'/',$newName);
+                        $announcementModel = new \App\Models\announcementModel();
+                        //save to the database
+                        $data = [
+                                'title'=>$this->request->getPost('title'),
+                                'details'=>$this->request->getPost('details'),
+                                'image'=>$newName,
+                                ];
+                        $announcementModel->update($this->request->getPost('id'),$data);
+                        return $this->response->setJSON(['success'=>'Successfully applied changes']);
+                    }
+                    else
+                    {
+                        $errors = ['file'=>'File upload failed or no file selected.'];
+                        return $this->response->setJSON(['errors'=>$errors]);
+                    }
+                }
+            }
+        }
+    }
+
     public function editAnnouncement($id)
     {
         if(!$this->hasPermission('announcement'))
@@ -313,6 +407,8 @@ class Administrator extends BaseController
         {
             $title = 'Edit Announcement';
             $data = ['title'=>$title];
+            $announcementModel = new \App\Models\announcementModel();
+            $data['announcement'] = $announcementModel->where('announcement_id',$id)->first();
             return view('admin/announcement/edit',$data);
         }
     }

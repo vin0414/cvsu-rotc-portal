@@ -44,7 +44,54 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
+                                        <i class="ti ti-users"></i>&nbsp;All Students
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-recent-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-clipboard-data"></i>&nbsp;Recent Attendance
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active show" id="tabs-home-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="table1">
+                                            <thead>
+                                                <th>Image</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Remarks</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-recent-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="table2">
+                                            <thead>
+                                                <th>Image</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Remarks</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -78,6 +125,10 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script>
+    $('#table1').DataTable();
+    $('#table2').DataTable();
+    </script>
 </body>
 
 </html>

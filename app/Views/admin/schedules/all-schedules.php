@@ -37,6 +37,19 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <a href="<?=site_url('schedules/create')?>"
+                                    class="btn btn-success btn-5 d-none d-sm-inline-block">
+                                    <i class="ti ti-plus"></i>&nbsp;Add
+                                </a>
+                                <a href="<?=site_url('schedules/create')?>"
+                                    class="btn btn-success btn-6 d-sm-none btn-icon">
+                                    <i class="ti ti-plus"></i>
+                                </a>
+                            </div>
+                            <!-- BEGIN MODAL -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,7 +57,7 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-
+                    <div id='calendar'></div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -78,6 +91,36 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+    var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
+        initialView: "dayGridMonth",
+        headerToolbar: {
+            start: 'title',
+            center: '',
+            end: 'today dayGridMonth listWeek listDay prev,next'
+        },
+        buttonText: {
+            today: 'Today',
+            month: 'Month',
+            listWeek: 'Week',
+            listDay: 'Day'
+        },
+        selectable: true,
+        editable: true,
+        views: {
+            // Customize the timeGridWeek and timeGridDay views
+            timeGridWeek: {
+                buttonText: 'Week'
+            },
+            timeGridDay: {
+                buttonText: 'Day'
+            },
+        }
+    });
+
+    calendar.render();
+    </script>
 </body>
 
 </html>

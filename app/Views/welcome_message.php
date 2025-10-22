@@ -89,6 +89,9 @@
                                         <button type="submit" class="btn btn-primary w-100">Login</button>
                                     </div>
                                 </form>
+                                <div class="text-center text-secondary mt-3">Don't have an account?
+                                    <a href="<?=site_url('sign-up')?>" tabindex="-1">Sign up here</a>
+                                </div>
                                 <div class="text-center text-secondary mt-3">
                                     Forgot password?<a href="<?=site_url('forgot-password')?>" tabindex="-1">
                                         Click here

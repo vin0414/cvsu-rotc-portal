@@ -7,13 +7,18 @@ use CodeIgniter\Router\RouteCollection;
  */
 //student
 $routes->post('validateUser','Home::validateUser');
+$routes->post('register','Home::register');
 $routes->post('new-password','Home::newPassword');
 $routes->get('logout','Home::logout');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
     $routes->get('/', 'Home::index');
+    $routes->get('sign-up','Home::signUp');
     $routes->get('forgot-password', 'Home::forgotPassword');
+    $routes->get('success/(:any)','Home::successLink/$1');
+    $routes->get('resend/(:any)','Home::resend/$1');
+    $routes->get('activate/(:any)','Home::activateAccount/$1');
 });
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
@@ -26,9 +31,13 @@ $routes->post('checkAuth','Administrator::checkAuth');
 $routes->get('sign-out','Administrator::logout');
 $routes->get('download','Download::downloadFile');
 $routes->post('restore','Restore::restoreFile');
-//ajax
+//cadet
+$routes->get('registered','Administrator::registeredUser');
+$routes->post('edit-cadet','Administrator::modifyCadet');
+//announcement
 $routes->post('save-announcement','Administrator::saveAnnouncement');
 $routes->post('edit-announcement','Administrator::modifyAnnouncement');
+//maintenance
 $routes->get('fetch-account','Administrator::fetchAccount');
 $routes->post('save-account','Administrator::saveAccount');
 $routes->post('edit-account','Administrator::modifyAccount');
@@ -41,7 +50,8 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     $routes->get('dashboard','Administrator::index');
     //cadets
     $routes->get('cadets','Administrator::cadetInformation');
-    $routes->get('cadet/view/(:any)','Administrator::cadetView/$1');
+    $routes->get('cadets/edit/(:any)','Administrator::editCadet/$1');
+    $routes->get('cadets/view/(:any)','Administrator::cadetView/$1');
     //schedules
     $routes->get('schedules','Administrator::trainingSchedule');
     $routes->get('schedules/create','Administrator::createSchedule');

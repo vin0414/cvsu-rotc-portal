@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Libraries\Hash;
+use App\Models\studentModel;
 
 class Administrator extends BaseController
 {
@@ -150,6 +151,92 @@ class Administrator extends BaseController
             $data['title'] = $title;
             return view('admin/cadets/cadet-list',$data);
         }
+    }
+
+    public function editCadet($id)
+    {
+        if(!$this->hasPermission('cadet'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'Cadets';
+            $student = new studentModel();
+            $data['student'] = $student->where('token',$id)->first();
+            $data['title'] = $title;
+            return view('admin/cadets/edit',$data);
+        }
+    }
+
+    public function modifyCadet()
+    {
+        $studentModel = new studentModel();
+        $validation = $this->validate([
+            'fullname'=>'required',
+            'school_id'=>'required',
+            'email'=>'required|valid_email',
+            'status'=>'required',
+            'id'=>'required|numeric'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = [
+                    'school_id'=>$this->request->getPost('school_id'),
+                    'fullname'=>$this->request->getPost('fullname'),
+                    'email'=>$this->request->getPost('email'),
+                    'status'=>$this->request->getPost('status')
+                ];
+            $studentModel->update($this->request->getPost('id'),$data);
+            return $this->response->setJSON(['success'=>'Successfully applied changes']);
+        }
+    }
+
+    public function registeredUser()
+    {
+        $studentModel = new studentModel();
+        $searchTerm = $_GET['search']['value'] ?? '';
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $studentModel->like('school_id', $searchTerm)
+                        ->orLike('fullname',$searchTerm);  
+        }
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredStudentModel = clone $studentModel;
+        if ($searchTerm) {
+            $filteredStudentModel->like('school_id', $searchTerm)
+                        ->orLike('fullname',$searchTerm);
+        }
+        // Fetch filtered records based on limit and offset
+        $students = $studentModel->findAll($limit, $offset);  
+        // Count total records (without filter)
+        $totalRecords = $studentModel->countAllResults();
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredStudentModel->countAllResults();
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($students as $row) {
+            $response['data'][] = [
+                'image'=>'<img src="assets/images/profile/'.$row['photo'].'" width="30px;"/>',
+                'id' => htmlspecialchars($row['school_id'], ENT_QUOTES),
+                'fullname' => htmlspecialchars($row['fullname'], ENT_QUOTES),
+                'email' => htmlspecialchars($row['email'], ENT_QUOTES),
+                'status' => ($row['status']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
+                'action' => '<a class="btn btn-primary" href="cadets/edit/' . $row['token'] . '"><i class="ti ti-edit"></i> Edit </a>'
+            ];
+        }
+        return $this->response->setJSON($response);
     }
 
     public function trainingSchedule()

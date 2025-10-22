@@ -106,9 +106,8 @@
                                         <table class="table table-bordered table-striped" id="table1">
                                             <thead>
                                                 <th>Image</th>
-                                                <th>Surname</th>
-                                                <th>First Name</th>
-                                                <th>M. I.</th>
+                                                <th>School ID</th>
+                                                <th>Fullname</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -187,7 +186,42 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    let table1 = $('#table1').DataTable();
+    let table1 = $('#table1').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('registered')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
+            },
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "image"
+            },
+            {
+                "data": "id"
+            },
+            {
+                "data": "fullname"
+            },
+            {
+                "data": "email"
+            },
+            {
+                "data": "status"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
     let table2 = $('#table2').DataTable();
     let table3 = $('#table3').DataTable();
     </script>

@@ -13,6 +13,124 @@ class Home extends BaseController
         helper(['url', 'form']);
     }
 
+    public function signUp()
+    {
+        return view('sign-up',['validation' => \Config\Services::validation()]);
+    }
+
+    public function register()
+    {
+        $validation = $this->validate([
+            'name'=>'required|is_unique[students.fullname]',
+            'school_id'=>'required|is_unique[students.school_id]',
+            'email'=>'required|valid_email|is_unique[students.email]',
+            'password'=>'required|min_length[8]|max_length[16]|regex_match[/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W]).+$/]',
+            'confirm_password'=>'required|matches[password]',
+            'agreement'=>'required'
+        ]);
+        if(!$validation)
+        {
+            return view('sign-up',['validation'=>$this->validator]);
+        }
+        else
+        {
+            $hash_password = Hash::make($this->request->getPost('password'));
+            function generateRandomString($length = 64) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token_code = generateRandomString();
+            //save
+            $userModel = new \App\Models\studentModel();
+            $data = [
+                    'school_id'=>$this->request->getPost('school_id'), 
+                    'password'=>$hash_password,
+                    'fullname'=>$this->request->getPost('name'),
+                    'email'=>$this->request->getPost('email'),
+                    'status'=>0,
+                    'is_enroll'=>0,
+                    'photo'=>'',
+                    'token'=>$token_code,
+                    ];
+            $userModel->save($data);
+            //send email activation link
+            $emailConfig = new Email();
+            $fromEmail = $emailConfig->fromEmail;
+            $fromName  = $emailConfig->fromName;
+            $email = \Config\Services::email();
+            $email->setTo($this->request->getPost('email'));
+            $email->setFrom($fromEmail, $fromName); 
+            $imgURL = "assets/images/logo.jpg";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>Account Activation</h1></center></td></tr>
+            <tr><td><center>Hi, ".$this->request->getPost('name')."</center></td></tr>
+            <tr><td><p><center>Please click the link below to activate your account.</center></p></td><tr>
+            <tr><td><center><b>".anchor('activate/'.$token_code,'Activate Account')."</b></center></td></tr>
+            <tr><td><p><center>If you did not sign-up in CVSU-CCC ROTC PORTAL,<br/> please ignore this message or contact us @ cvsu-ccc-rotc-portal@gmail.com</center></p></td></tr>
+            <tr><td><center>IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Account Activation | CVSU-CCC ROTC PORTAL";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+            session()->setFlashdata('success','Great! Successfully sent activation link');
+            return redirect()->to('success/'.$token_code)->withInput();
+        }
+    }
+
+    public function successLink($id)
+    {
+        $data = ['token'=>$id];
+        return view('success',$data);
+    }
+
+    public function resend($id)
+    {
+        $userModel = new \App\Models\studentModel();
+        $user = $userModel->WHERE('token',$id)->first();
+        //send email activation link
+        $emailConfig = new Email();
+        $fromEmail = $emailConfig->fromEmail;
+        $fromName  = $emailConfig->fromName;
+        $email = \Config\Services::email();
+        $email->setTo($user['email']);
+        $email->setFrom($fromEmail, $fromName); 
+        $imgURL = "assets/images/logo.jpg";
+        $email->attach($imgURL);
+        $cid = $email->setAttachmentCID($imgURL);
+        $template = "<center>
+        <img src='cid:". $cid ."' width='100'/>
+        <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+        <tr><td><center><h1>Account Activation</h1></center></td></tr>
+        <tr><td><center>Hi, ".$user['fullname']."</center></td></tr>
+        <tr><td><p><center>Please click the link below to activate your account.</center></p></td><tr>
+        <tr><td><center><b>".anchor('activate/'.$id,'Activate Account')."</b></center></td></tr>
+        <tr><td><p><center>If you did not sign-up in CVSU-CCC ROTCL PORTAL Website,<br/> please ignore this message or contact us @ cvsu-ccc-rotc-portalb@gmail.com</center></p></td></tr>
+        <tr><td><center>IT Support</center></td></tr></tbody></table></center>";
+        $subject = "Account Activation | CVSU-CCC ROTC PORTAL";
+        $email->setSubject($subject);
+        $email->setMessage($template);
+        $email->send();
+        session()->setFlashdata('success','Great! Successfully sent activation link');
+        return redirect()->to('success/'.$id)->withInput();
+    }
+
+    public function activateAccount($id)
+    {
+        $userModel = new \App\Models\studentModel();
+        $student = $userModel->WHERE('token',$id)->first();
+        $values = ['status'=>1];
+        $userModel->update($student['student_id'],$values);
+        session()->set('loggedUser', $student['student_id']);
+        session()->set('fullname',$student['fullname']);
+        session()->set('student_number',$student['school_id']);
+        return $this->response->redirect(site_url('cadet/dashboard'));
+    }
+
     public function index(): string
     {
         return view('welcome_message',['validation' => \Config\Services::validation()]);
@@ -52,7 +170,7 @@ class Home extends BaseController
             $password = $this->request->getPost('password');
 
             $student = $studentModel->where('school_id', $student_number)->where('status',1)->first();
-            $fullname = $student['first_name'] . ' ' . $student['middle_name'] . ' ' . $student['surname'];
+            $fullname = $student['fullname'];
 
             if($student)
             {

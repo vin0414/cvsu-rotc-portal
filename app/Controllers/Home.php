@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Libraries\Hash;
 use Config\Email;
+use \App\Models\cadetModel;
 
 class Home extends BaseController
 {
@@ -10,7 +11,7 @@ class Home extends BaseController
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        helper(['url', 'form']);
+        helper(['url', 'form','text']);
     }
 
     public function signUp()
@@ -291,9 +292,30 @@ class Home extends BaseController
         }
         else
         {
+            //check if cadets is empty
+            $cadetModel = new cadetModel();
+            $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+            if(empty($cadet))
+            {
+                return redirect()->to(base_url('cadet/profile'));
+            }
             $data['fullname'] = $session->get('fullname');
             $data['title']= 'Dashboard';
             return view('cadet/dashboard', $data);
         }
+    }
+
+    public function studentProfile()
+    {
+        $data['title'] = "Cadet Profile";
+        $cadetModel = new cadetModel();
+        $data['cadet'] = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+        return view('cadet/profile',$data);
+    }
+
+    public function accountSecurity()
+    {
+        $data['title'] = "Account Security";
+        return view('cadet/account',$data);
     }
 }

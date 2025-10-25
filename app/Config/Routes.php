@@ -24,6 +24,8 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('cadet/dashboard','Home::studentDashboard');
+    $routes->get('cadet/profile','Home::studentProfile');
+    $routes->get('cadet/account-security','Home::accountSecurity');
 });
 
 //admin

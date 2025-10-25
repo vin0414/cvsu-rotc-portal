@@ -25,6 +25,9 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('cadet/dashboard','Home::studentDashboard');
     $routes->get('cadet/profile','Home::studentProfile');
+    $routes->get('cadet/trainings','Home::studentTrainings');
+    $routes->get('cadet/attendance','Home::studentAttendance');
+    $routes->get('cadet/performance','Home::studentPerformance');
     $routes->get('cadet/account-security','Home::accountSecurity');
 });
 

@@ -116,7 +116,6 @@
                                     <span class="nav-link-title"> Dashboard </span>
                                 </a>
                             </li>
-                            <?php if(!empty(session()->get('loggedUser'))): ?>
                             <li class="nav-item <?= ($title =='Cadet Profile') ? 'active' : '' ?>">
                                 <a class="nav-link" href="<?=site_url('cadet/profile')?>">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -133,7 +132,61 @@
                                     <span class="nav-link-title"> My Profile </span>
                                 </a>
                             </li>
-                            <?php endif; ?>
+                            <li class="nav-item <?= ($title =='My Trainings') ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?=site_url('cadet/trainings')?>">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-brand-databricks">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title"> My Trainings </span>
+                                </a>
+                            </li>
+                            <li class="nav-item <?= ($title =='My Attendance') ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?=site_url('cadet/attendance')?>">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3" />
+                                            <path d="M16 3v4" />
+                                            <path d="M8 3v4" />
+                                            <path d="M4 11h10" />
+                                            <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                            <path d="M18 16.5v1.5l.5 .5" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title"> My Attendance </span>
+                                </a>
+                            </li>
+                            <li class="nav-item <?= ($title =='My Performance') ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?=site_url('cadet/performance')?>">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-chart-bar-popular">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path
+                                                d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path
+                                                d="M15 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            <path d="M4 20h14" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title"> My Performance </span>
+                                </a>
+                            </li>
                         </ul>
                         <!-- END NAVBAR MENU -->
                     </div>

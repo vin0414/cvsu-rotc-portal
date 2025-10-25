@@ -313,6 +313,24 @@ class Home extends BaseController
         return view('cadet/profile',$data);
     }
 
+    public function studentTrainings()
+    {
+        $data['title'] = "My Trainings";
+        return view('cadet/trainings',$data);
+    }
+
+    public function studentAttendance()
+    {
+        $data['title'] = "My Attendance";
+        return view('cadet/attendance',$data);
+    }
+
+    public function studentPerformance()
+    {
+        $data['title'] = "My Performance";
+        return view('cadet/performance',$data);
+    }
+
     public function accountSecurity()
     {
         $data['title'] = "Account Security";

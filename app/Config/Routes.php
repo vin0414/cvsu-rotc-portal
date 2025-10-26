@@ -27,6 +27,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('cadet/dashboard','Home::studentDashboard');
     $routes->get('cadet/profile','Home::studentProfile');
+    $routes->get('cadet/qr-code','Home::qrCode');
     $routes->get('cadet/trainings','Home::studentTrainings');
     $routes->get('cadet/attendance','Home::studentAttendance');
     $routes->get('cadet/performance','Home::studentPerformance');
@@ -40,7 +41,9 @@ $routes->get('download','Download::downloadFile');
 $routes->post('restore','Restore::restoreFile');
 //cadet
 $routes->get('registered','Administrator::registeredUser');
+$routes->get('enrolled','Administrator::enrolledCadet');
 $routes->post('edit-cadet','Administrator::modifyCadet');
+$routes->post('enroll-cadet','Administrator::enrollCadet');
 //announcement
 $routes->post('save-announcement','Administrator::saveAnnouncement');
 $routes->post('edit-announcement','Administrator::modifyAnnouncement');

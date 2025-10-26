@@ -45,6 +45,34 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
+                                <?php if($cadet['is_enroll']!=1):?>
+                                <button type="button" class="btn btn-primary enroll" value="<?=$cadet['student_id']?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-pencil-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                        <path d="M13.5 6.5l4 4" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                    </svg>
+                                    Enroll
+                                </button>
+                                <?php else : ?>
+                                <button type="button" class="btn btn-primary" value="<?=$cadet['student_id']?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                                        <path d="M15 19l2 2l4 -4" />
+                                    </svg>
+                                    Enrolled
+                                </button>
+                                <?php endif;?>
                                 <a href="<?=site_url('cadets')?>"
                                     class="btn btn-default text-success btn-5 d-none d-sm-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -222,9 +250,120 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="tabs-other-8">
                                                     <br />
+                                                    <div class="row g-3">
+                                                        <div class="col-lg-12">
+                                                            <label class="form-label">Mother's Name</label>
+                                                            <input type="text" class="form-control"
+                                                                value="<?=$info['mother_sname']?>, <?=$info['mother_fname']?> <?=$info['mother_mname']?>">
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">Contact No</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['mother_contact']?>">
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">Occupation</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['mother_work']?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label class="form-label">Father's Name</label>
+                                                            <input type="text" class="form-control"
+                                                                value="<?=$info['father_sname']?>, <?=$info['father_fname']?> <?=$info['father_mname']?>">
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">Contact No</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['father_contact']?>">
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">Occupation</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['father_work']?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <h3>Emergency Contact</h3>
+                                                            <label class="form-label">Address</label>
+                                                            <textarea class="form-control"><?=$info['emergency_address']?>
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Relationship</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['relationship']?>">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Contact Person</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['emergency_contact']?>">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Email Address</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['emergency_email']?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" />
+                                        </svg>
+                                        Attachments
+                                    </div>
+                                    <div class="list-group list-group-hoverable mb-3">
+                                        <?php if(!empty($attachment)): ?>
+                                        <div class="list-group-item">
+                                            <a href="<?=base_url('Upload/')?><?=$attachment['file']?>"
+                                                class="btn btn-primary btn-sm" style="padding:5px;float:right;">
+                                                <i class="ti ti-download"></i>
+                                            </a>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="list-group-item">
+                                            No Attachment(s) found
+                                        </div>
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-brand-databricks">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" />
+                                        </svg>
+                                        Training(s)
                                     </div>
                                 </div>
                             </div>
@@ -255,6 +394,19 @@
             <!--  END FOOTER  -->
         </div>
     </div>
+    <div class="modal" id="modal-loading" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="mb-2">
+                        <dotlottie-wc src="https://lottie.host/ed13f8d5-bc3f-4786-bbb8-36d06a21a6cb/XMPpTra572.lottie"
+                            style="width: 100%;height: auto;" autoplay loop></dotlottie-wc>
+                    </div>
+                    <div>Loading</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="<?=base_url('assets/js/tabler.min.js')?>" defer></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
@@ -264,6 +416,40 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+    <script>
+    $(document).on('click', '.enroll', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to enroll this cadet?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Continue',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            // Action based on user's choice
+            if (result.isConfirmed) {
+                $('#modal-loading').modal('show');
+                const value = $(this).val();
+                $.ajax({
+                    url: "<?=site_url('enroll-cadet')?>",
+                    method: "POST",
+                    data: {
+                        value: value,
+                    },
+                    success: function(response) {
+                        $('#modal-loading').modal('hide');
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.errors);
+                        }
+                    }
+                });
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

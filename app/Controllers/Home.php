@@ -320,21 +320,55 @@ class Home extends BaseController
         return view('cadet/profile',$data);
     }
 
+    public function qrCode()
+    {
+        $data['title'] = "My QR Code";
+        //check if cadets is empty
+        $cadetModel = new cadetModel();
+        $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+        if(empty($cadet))
+        {
+            return redirect()->to(base_url('cadet/profile'));
+        }
+        return view('cadet/qrcode',$data);
+    }
+
     public function studentTrainings()
     {
         $data['title'] = "My Trainings";
+        //check if cadets is empty
+        $cadetModel = new cadetModel();
+        $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+        if(empty($cadet))
+        {
+            return redirect()->to(base_url('cadet/profile'));
+        }
         return view('cadet/trainings',$data);
     }
 
     public function studentAttendance()
     {
         $data['title'] = "My Attendance";
+        //check if cadets is empty
+        $cadetModel = new cadetModel();
+        $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+        if(empty($cadet))
+        {
+            return redirect()->to(base_url('cadet/profile'));
+        }
         return view('cadet/attendance',$data);
     }
 
     public function studentPerformance()
     {
         $data['title'] = "My Performance";
+        //check if cadets is empty
+        $cadetModel = new cadetModel();
+        $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
+        if(empty($cadet))
+        {
+            return redirect()->to(base_url('cadet/profile'));
+        }
         return view('cadet/performance',$data);
     }
 

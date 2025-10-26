@@ -178,13 +178,14 @@ class Administrator extends BaseController
         }
         else
         {
-            $title = 'View Cadet';
+            $data['title'] = 'View Cadet';
             $studentModel = new studentModel();
             $info = new cadetModel();
+            $attachment = new \App\Models\attachmentModel();
             $student = $studentModel->where('token',$id)->first();
             $data['cadet'] = $student;
             $data['info'] = $info->where('student_id',$student['student_id'])->first();
-            $data['title'] = $title;
+            $data['attachment'] = $attachment->where('student_id',$student['student_id'])->first();
             return view('admin/cadets/view',$data);
         }
     }
@@ -235,11 +236,11 @@ class Administrator extends BaseController
                         ->orLike('fullname',$searchTerm);
         }
         // Fetch filtered records based on limit and offset
-        $students = $studentModel->findAll($limit, $offset);  
+        $students = $studentModel->where('is_enroll',0)->findAll($limit, $offset);  
         // Count total records (without filter)
-        $totalRecords = $studentModel->countAllResults();
+        $totalRecords = $studentModel->where('is_enroll',0)->countAllResults();
         // Count filtered records (with filter)
-        $filteredRecords = $filteredStudentModel->countAllResults();
+        $filteredRecords = $filteredStudentModel->where('is_enroll',0)->countAllResults();
         $response = [
             "draw" => $_GET['draw'],
             "recordsTotal" => $totalRecords,
@@ -263,14 +264,85 @@ class Administrator extends BaseController
                             <a href="cadets/info/'.$row['token'].'" class="dropdown-item">
                                 <i class="ti ti-list"></i>&nbsp;View Info
                             </a>
-                            <button type="button" value="'.$row['student_id'].'" class="dropdown-item enrol">
-                                <i class="ti ti-logout-2"></i>&nbsp;Enrol
+                            <button type="button" value="'.$row['student_id'].'" class="dropdown-item enroll">
+                                <i class="ti ti-pencil-plus"></i>&nbsp;Enroll
                             </button>
                         </div>
                     '
             ];
         }
         return $this->response->setJSON($response);
+    }
+
+    public function enrolledCadet()
+    {
+        $searchTerm = $_GET['search']['value'] ?? '';
+        // Apply the search filter for the main query
+        $builder = $this->db->table('students a');
+        $builder->select('a.student_id,a.school_id,a.fullname,a.token,a.photo,b.course,b.year,b.section');
+        $builder->join('cadets b','b.student_id=a.student_id','LEFT');
+        $builder->where('a.is_enroll',1)->groupBy('a.student_id');
+        if ($searchTerm) {
+            $builder->groupStart()
+                    ->like('a.fullname', $searchTerm)
+                    ->orLike('a.school_id', $searchTerm)
+                    ->orLike('b.course', $searchTerm)
+                    ->groupEnd();  
+        }
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+        $builder->limit($limit, $offset);
+        // Fetch filtered records based on limit and offset
+        $students = $builder->get()->getResult();  
+        // Count total records (without filter)
+        $totalRecords = count($students);
+        // Count filtered records (with filter)
+        $filteredRecords = count($students);
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($students as $row) {
+            $response['data'][] = [
+                'image'=>'<img src="assets/images/profile/'.$row->photo.'" width="30px;"/>',
+                'id' => htmlspecialchars($row->school_id, ENT_QUOTES),
+                'fullname' => htmlspecialchars($row->fullname, ENT_QUOTES),
+                'course' => htmlspecialchars($row->course, ENT_QUOTES).'-'.htmlspecialchars($row->year, ENT_QUOTES),
+                'section' => htmlspecialchars($row->section, ENT_QUOTES),
+                'action'=>'<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button">
+                            <span>More</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="cadets/edit/'.$row->token.'" class="dropdown-item">
+                                <i class="ti ti-edit"></i>&nbsp;Edit
+                            </a>
+                            <a href="cadets/info/'.$row->token.'" class="dropdown-item">
+                                <i class="ti ti-list"></i>&nbsp;View Info
+                            </a>
+                        </div>
+                    '
+            ];
+        }
+        return $this->response->setJSON($response);
+    }
+
+    public function enrollCadet()
+    {
+        $studentModel = new studentModel();
+        $val = $this->request->getPost('value');
+        if(!is_numeric($val))
+        {
+            return $this->response->setJSON(['errors'=>'Invalid Request']);
+        }
+        else
+        {
+            $data = ['is_enroll'=>1];
+            $studentModel->update($val,$data);
+            return $this->response->setJSON(['success'=>'Success']);
+        }
     }
 
     public function trainingSchedule()

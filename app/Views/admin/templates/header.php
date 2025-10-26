@@ -158,7 +158,7 @@
                     </li>
                     <?php endif; ?>
                     <?php if($role['grading_system']==1): ?>
-                    <li class="nav-item <?= ($title == 'Grading System') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Gradebook') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('evaluation')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

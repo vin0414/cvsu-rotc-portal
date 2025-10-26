@@ -16,6 +16,61 @@
                         <div class="col">
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <a href="<?=site_url('cadet/qr-code')?>" class="btn btn-default">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-qrcode">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                        <path d="M7 17l0 .01" />
+                                        <path
+                                            d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                        <path d="M7 7l0 .01" />
+                                        <path
+                                            d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                        <path d="M17 7l0 .01" />
+                                        <path d="M14 14l3 0" />
+                                        <path d="M20 14l0 .01" />
+                                        <path d="M14 14l0 3" />
+                                        <path d="M14 20l3 0" />
+                                        <path d="M17 17l3 0" />
+                                        <path d="M20 17l0 3" />
+                                    </svg>
+                                    Generate QR Code
+                                </a>
+                                <a href="" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-up">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M12 18.004h-5.343c-2.572 -.004 -4.657 -2.011 -4.657 -4.487c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.38 0 2.57 .811 3.128 1.986" />
+                                        <path d="M19 22v-6" />
+                                        <path d="M22 19l-3 -3l-3 3" />
+                                    </svg>
+                                    Upload
+                                </a>
+                                <a href="" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-up">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M12 18.004h-5.343c-2.572 -.004 -4.657 -2.011 -4.657 -4.487c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.38 0 2.57 .811 3.128 1.986" />
+                                        <path d="M19 22v-6" />
+                                        <path d="M22 19l-3 -3l-3 3" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- BEGIN MODAL -->
+                            <!-- END MODAL -->
+                        </div>
                     </div>
                 </div>
             </div>

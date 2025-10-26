@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Libraries\Hash;
 use Config\Email;
 use \App\Models\cadetModel;
+use \App\Models\favoriteModel;
 
 class Home extends BaseController
 {
@@ -301,6 +302,12 @@ class Home extends BaseController
             }
             $data['fullname'] = $session->get('fullname');
             $data['title']= 'Dashboard';
+            //announcement
+            $model = new \App\Models\announcementModel();
+            $data['announcement'] = $model->orderBy('announcement_id','DESC')->limit(5)->findAll();
+            //favorites
+            $favorite = new favoriteModel();
+            $data['favorite'] = $favorite->where('student_id',session()->get('loggedUser'))->findAll();
             return view('cadet/dashboard', $data);
         }
     }
@@ -335,5 +342,105 @@ class Home extends BaseController
     {
         $data['title'] = "Account Security";
         return view('cadet/account',$data);
+    }
+
+    //functions for cadet
+    public function saveProfile()
+    {
+        $cadetModel = new cadetModel();
+        $validation = $this->validate([
+            'birth_date'=>['rules'=>'required','errors'=>['required'=>'Birth Date is required']],
+            'height'=>['rules'=>'required','errors'=>['required'=>'Height is required']],
+            'weight'=>['rules'=>'required','errors'=>['required'=>'Weight is required']],
+            'blood_type'=>['rules'=>'required','errors'=>['required'=>'Enter blood type']],
+            'gender'=>['rules'=>'required','errors'=>['required'=>'Select gender']],
+            'religion'=>['rules'=>'required','errors'=>['required'=>'Enter your religion']],
+            'house_no'=>['rules'=>'required','errors'=>['required'=>'House Number is required']],
+            'street'=>['rules'=>'required','errors'=>['required'=>'Street is required']],
+            'village'=>['rules'=>'required','errors'=>['required'=>'Village is required']],
+            'municipality'=>['rules'=>'required','errors'=>['required'=>'Municipality is required']],
+            'province'=>['rules'=>'required','errors'=>['required'=>'Province is required']],
+            'course'=>['rules'=>'required','errors'=>['required'=>'Enter your course']],
+            'year'=>['rules'=>'required','errors'=>['required'=>'Year is required']],
+            'section'=>['rules'=>'required','errors'=>['required'=>'Enter your section']],
+            'school'=>['rules'=>'required','errors'=>['required'=>'Enter the name of school attended']],
+            'contact_no'=>['rules'=>'required','errors'=>['required'=>'Enter your contact number']],
+            'fb_account'=>['rules'=>'required','errors'=>['required'=>'Enter your facebook account URL']],
+            'email'=>['rules'=>'required|valid_email','errors'=>['required'=>'Email is required','valid_email'=>'Enter valid email address']],
+            'm_surname'=>['rules'=>'required','errors'=>['required'=>"Enter your mother's surname"]],
+            'm_firstname'=>['rules'=>'required','errors'=>['required'=>"Enter your mother's first name"]],
+            'm_middlename'=>['rules'=>'required','errors'=>['required'=>"Enter your mother's middle name"]],
+            'm_contact_no'=>['rules'=>'required','errors'=>['required'=>"Enter your mother's contact number"]],
+            'm_occupation'=>['rules'=>'required','errors'=>['required'=>"Enter your mother's occupation"]],
+            'f_surname'=>['rules'=>'required','errors'=>['required'=>"Enter your father's surname"]],
+            'f_firstname'=>['rules'=>'required','errors'=>['required'=>"Enter your father's first name"]],
+            'f_middlename'=>['rules'=>'required','errors'=>['required'=>"Enter your father's middle name"]],
+            'f_contact_no'=>['rules'=>'required','errors'=>['required'=>"Enter your father's contact number"]],
+            'f_occupation'=>['rules'=>'required','errors'=>['required'=>"Enter your father's occupation"]],
+            'address'=>['rules'=>'required','errors'=>['required'=>"Address is required"]],
+            'relationship'=>['rules'=>'required','errors'=>['required'=>"Relationship is required"]],
+            'contact_person'=>['rules'=>'required','errors'=>['required'=>"Contact Person is required"]],
+            'contact_email'=>['rules'=>'required|valid_email','errors'=>['required'=>"Contact email is required",'valid_email'=>'Enter valid email address']],
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            //generate token
+            function generateRandomString($length = 64) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token = generateRandomString();
+            $data = [
+                'student_id'=>session()->get('loggedUser'),
+                'house_no'=>$this->request->getPost('house_no'),
+                'street'=>$this->request->getPost('street'),
+                'village'=>$this->request->getPost('village'),
+                'municipality'=>$this->request->getPost('municipality'),
+                'province'=>$this->request->getPost('province'),
+                'course'=>$this->request->getPost('course'),
+                'year'=>$this->request->getPost('year'),
+                'section'=>$this->request->getPost('section'),
+                'school_attended'=>$this->request->getPost('school'),
+                'birthdate'=>$this->request->getPost('birth_date'),
+                'height'=>$this->request->getPost('height'),
+                'weight'=>$this->request->getPost('weight'),
+                'blood_type'=>$this->request->getPost('blood_type'),
+                'gender'=>$this->request->getPost('gender'),
+                'religion'=>$this->request->getPost('religion'),
+                'contact_no'=>$this->request->getPost('contact_no'),
+                'fb_account'=>$this->request->getPost('fb_account'),
+                'email'=>$this->request->getPost('email'),
+                'mother_sname'=>$this->request->getPost('m_surname'),
+                'mother_fname'=>$this->request->getPost('m_firstname'),
+                'mother_mname'=>$this->request->getPost('m_middlename'),
+                'mother_contact'=>$this->request->getPost('m_contact_no'),
+                'mother_work'=>$this->request->getPost('m_occupation'),
+                'father_sname'=>$this->request->getPost('f_surname'),
+                'father_fname'=>$this->request->getPost('f_firstname'),
+                'father_mname'=>$this->request->getPost('f_middlename'),
+                'father_contact'=>$this->request->getPost('f_contact_no'),
+                'father_work'=>$this->request->getPost('f_occupation'),
+                'emergency_address'=>$this->request->getPost('address'),
+                'relationship'=>$this->request->getPost('relationship'),
+                'emergency_contact'=>$this->request->getPost('contact_person'),
+                'emergency_email'=>$this->request->getPost('contact_email'),
+                'token'=>$token
+            ];
+            if(empty($this->request->getPost('cadet_id')))
+            {
+                $cadetModel->save($data);
+            }
+            else
+            {
+                $cadetModel->update($this->request->getPost('cadet_id'),$data);
+            }
+            return $this->response->setJSON(['success'=>"Success"]);
+        }
     }
 }

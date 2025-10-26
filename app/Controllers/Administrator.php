@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Libraries\Hash;
 use App\Models\studentModel;
+use App\Models\cadetModel;
 
 class Administrator extends BaseController
 {
@@ -169,6 +170,25 @@ class Administrator extends BaseController
         }
     }
 
+    public function cadetInfo($id)
+    {
+        if(!$this->hasPermission('cadet'))
+        {
+            return redirect()->to('/dashboard')->with('fail', 'You do not have permission to access that page!');
+        }
+        else
+        {
+            $title = 'View Cadet';
+            $studentModel = new studentModel();
+            $info = new cadetModel();
+            $student = $studentModel->where('token',$id)->first();
+            $data['cadet'] = $student;
+            $data['info'] = $info->where('student_id',$student['student_id'])->first();
+            $data['title'] = $title;
+            return view('admin/cadets/view',$data);
+        }
+    }
+
     public function modifyCadet()
     {
         $studentModel = new studentModel();
@@ -233,7 +253,21 @@ class Administrator extends BaseController
                 'fullname' => htmlspecialchars($row['fullname'], ENT_QUOTES),
                 'email' => htmlspecialchars($row['email'], ENT_QUOTES),
                 'status' => ($row['status']==1) ? '<i class="ti ti-check"></i>&nbsp;Active' : '<i class="ti ti-x"></i>&nbsp;Inactive',
-                'action' => '<a class="btn btn-primary" href="cadets/edit/' . $row['token'] . '"><i class="ti ti-edit"></i> Edit </a>'
+                'action'=>'<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button">
+                            <span>More</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="cadets/edit/'.$row['token'].'" class="dropdown-item">
+                                <i class="ti ti-edit"></i>&nbsp;Edit
+                            </a>
+                            <a href="cadets/info/'.$row['token'].'" class="dropdown-item">
+                                <i class="ti ti-list"></i>&nbsp;View Info
+                            </a>
+                            <button type="button" value="'.$row['student_id'].'" class="dropdown-item enrol">
+                                <i class="ti ti-logout-2"></i>&nbsp;Enrol
+                            </button>
+                        </div>
+                    '
             ];
         }
         return $this->response->setJSON($response);
@@ -906,127 +940,6 @@ class Administrator extends BaseController
                     ];      
             $logModel->save($data);
             return $this->response->setJSON(['success' => 'Account modified successfully!']);
-        }
-    }
-
-    public function saveCadet()
-    {
-        $studentModel = new \App\Models\studentModel();
-        $cadetModel = new \App\Models\cadetModel();
-        $validation = $this->validate([
-            'lastname' => 'required|min_length[2]|max_length[100]',
-            'firstname' => 'required|min_length[2]|max_length[100]',
-            'student_no' => 'required|min_length[8]|max_length[15]|is_unique[students.school_id]',
-            'house_no' => 'required|max_length[50]',
-            'street' => 'required|max_length[100]',
-            'village' => 'required|max_length[100]',
-            'municipality' => 'required|max_length[100]',
-            'province' => 'required|max_length[100]',
-            'course' => 'required|max_length[100]',
-            'year_level' => 'required',
-            'section' => 'required|max_length[50]',
-            'birth_date' => 'required|valid_date',
-            'height' => 'required|decimal',
-            'weight' => 'required|decimal',
-            'blood_type' => 'required|max_length[5]',
-            'gender' => 'required|in_list[Male,Female]',
-            'religion' => 'required|max_length[100]',
-            'contact_no' => 'required|numeric|min_length[10]|max_length[15]',
-            'fb_account' => 'required|valid_url|max_length[150]',
-            'email' => 'required|valid_email|max_length[150]',
-            'emergency_contact' => 'required|max_length[150]',
-            'emergency_house_no' => 'required|max_length[50]',
-            'emergency_street' => 'required|max_length[100]',
-            'emergency_village' => 'required|max_length[100]',
-            'emergency_municipality' => 'required|max_length[100]',
-            'emergency_province' => 'required|max_length[100]',
-            'relationship' => 'required|max_length[50]',
-            'emergency_contact_no' => 'required|numeric|min_length[10]|max_length[15]',
-            'emergency_email' => 'required|valid_email|max_length[150]',
-        ]);
-
-        if(!$validation)
-        {
-            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
-        }
-        else
-        {
-            if(empty($this->request->getPost('mother_sname'))||
-                empty($this->request->getPost('father_sname'))||
-                empty($this->request->getPost('mother_fname'))||
-                empty($this->request->getPost('father_sname')))
-            {
-                $error = ['parents'=>"Please enter your parent's information"];
-                return $this->response->SetJSON(['error' => $error]);
-            }
-            else
-            {
-                $token = bin2hex(random_bytes(32));
-                $data =  ['school_id'=>$this->request->getPost('student_no'),
-                        'password'=>Hash::make('Abc12345?'),
-                        'first_name'=>$this->request->getPost('firstname'),
-                        'middle_name'=>$this->request->getPost('middlename'),
-                        'surname'=>$this->request->getPost('lastname'),
-                        'suffix'=>$this->request->getPost('suffix'),
-                        'email'=>$this->request->getPost('email'),
-                        'status'=>1,
-                        'is_enroll'=>1,
-                        'photo'=>'',
-                        'token'=>$token,
-                        'date_created'=>date('Y-m-d H:i:s a')
-                        ];
-                $studentModel->save($data);
-                //get the student ID
-                $student = $studentModel->WHERE('school_id',$this->request->getPost('student_no'))->first();
-                //cadet information
-                $record = ['student_id'=>$student['student_id'],
-                            'school_id'=>$this->request->getPost('student_no'),
-                            'first_name'=>$this->request->getPost('firstname'),
-                            'middle_name'=>$this->request->getPost('middlename'),
-                            'surname'=>$this->request->getPost('lastname'),
-                            'suffix'=>$this->request->getPost('suffix'),
-                            'house_no'=>$this->request->getPost('house_no'),
-                            'street'=>$this->request->getPost('street'),
-                            'village'=>$this->request->getPost('village'),
-                            'municipality'=>$this->request->getPost('municipality'),
-                            'province'=>$this->request->getPost('province'),
-                            'course'=>$this->request->getPost('course'),
-                            'year'=>$this->request->getPost('year_level'),
-                            'section'=>$this->request->getPost('section'),
-                            'school_attended'=>$this->request->getPost('last_school'),
-                            'birthdate'=>$this->request->getPost('birth_date'),
-                            'height'=>$this->request->getPost('height'),
-                            'weight'=>$this->request->getPost('weight'),
-                            'blood_type'=>$this->request->getPost('blood_type'),
-                            'gender'=>$this->request->getPost('gender'),
-                            'religion'=>$this->request->getPost('religion'),
-                            'contact_no'=>$this->request->getPost('contact_no'),
-                            'fb_account'=>$this->request->getPost('fb_account'),
-                            'email'=>$this->request->getPost('email'),
-                            'mother_sname'=>$this->request->getPost('mother_sname'),
-                            'mother_fname'=>$this->request->getPost('mother_fname'),
-                            'mother_mname'=>$this->request->getPost('mother_mname'),
-                            'mother_contact'=>$this->request->getPost('mother_contact'),
-                            'mother_work'=>$this->request->getPost('mother_work'),
-                            'father_sname'=>$this->request->getPost('father_sname'),
-                            'father_fname'=>$this->request->getPost('father_fname'),
-                            'father_mname'=>$this->request->getPost('father_mname'),
-                            'father_contact'=>$this->request->getPost('father_contact'),
-                            'father_work'=>$this->request->getPost('father_work'),
-                            'emergency_contact'=>$this->request->getPost('emergency_contact'),
-                            'emergency_house_no'=>$this->request->getPost('emergency_house_no'),
-                            'emergency_street'=>$this->request->getPost('emergency_street'),
-                            'emergency_village'=>$this->request->getPost('emergency_village'),
-                            'emergency_municipality'=>$this->request->getPost('emergency_municipality'),
-                            'emergency_province'=>$this->request->getPost('emergency_province'),
-                            'relationship'=>$this->request->getPost('relationship'),
-                            'emergency_contact_no'=>$this->request->getPost('emergency_contact_no'),
-                            'emergency_email'=>$this->request->getPost('emergency_email'),
-                            'token'=>$token,
-                            'date_created'=>date('Y-m-d')];
-                $cadetModel->save($record);
-                return $this->response->SetJSON(['success' => 'Successfully saved']);
-            }
         }
     }
 }

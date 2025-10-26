@@ -246,6 +246,8 @@
 <!-- BEGIN DEMO SCRIPTS -->
 <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
 <!-- END DEMO SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- BEGIN PAGE SCRIPTS -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {

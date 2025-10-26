@@ -102,19 +102,17 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="tabs-home-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="table1">
-                                            <thead>
-                                                <th>Image</th>
-                                                <th>School ID</th>
-                                                <th>Fullname</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
+                                    <table class="table table-bordered table-striped" id="table1">
+                                        <thead>
+                                            <th>Image</th>
+                                            <th>School ID</th>
+                                            <th>Fullname</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="tabs-enrolled-8">
                                     <div class="table-responsive">

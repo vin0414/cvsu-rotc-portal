@@ -10,6 +10,8 @@ $routes->post('validateUser','Home::validateUser');
 $routes->post('register','Home::register');
 $routes->post('new-password','Home::newPassword');
 $routes->get('logout','Home::logout');
+//ajax
+$routes->post('save-profile','Home::saveProfile');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -56,7 +58,7 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     //cadets
     $routes->get('cadets','Administrator::cadetInformation');
     $routes->get('cadets/edit/(:any)','Administrator::editCadet/$1');
-    $routes->get('cadets/view/(:any)','Administrator::cadetView/$1');
+    $routes->get('cadets/info/(:any)','Administrator::cadetInfo/$1');
     //schedules
     $routes->get('schedules','Administrator::trainingSchedule');
     $routes->get('schedules/create','Administrator::createSchedule');

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
+
     h4 {
         border: 0.5px solid lightgray;
         padding: 10px;
@@ -42,9 +43,9 @@
                             <h2 class="page-title"><?=$cadet['school_id']?></h2>
                         </div>
                         <!-- Page title actions -->
-                         <div class="col-auto ms-auto d-print-none">
+                        <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('cadet-information')?>"
+                                <a href="<?=site_url('cadets')?>"
                                     class="btn btn-default text-success btn-5 d-none d-sm-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -57,7 +58,7 @@
                                     </svg>
                                     Back
                                 </a>
-                                <a href="<?=site_url('cadet-information')?>"
+                                <a href="<?=site_url('cadets')?>"
                                     class="btn btn-default text-success btn-6 d-sm-none btn-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -91,7 +92,7 @@
                                                 <div class="col-lg-8">
                                                     <label class="form-label"><small>Student Name</small></label>
                                                     <h4>
-                                                        <?=$cadet['surname']?>&nbsp;<?=$cadet['suffix']?>,&nbsp;<?=$cadet['first_name']?>&nbsp;<?=$cadet['middle_name']?>
+                                                        <?=$cadet['fullname']?>
                                                     </h4>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -101,31 +102,128 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="row g-3">
-                                                <div class="col-lg-4">
-                                                    <label class="form-label"><small>Course</small></label>
-                                                    <h4><?=$cadet['course']?></h4>
+                                            <ul class="nav nav-tabs" data-bs-toggle="tabs">
+                                                <li class="nav-item">
+                                                    <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-shield">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h2" />
+                                                            <path
+                                                                d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />
+                                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                        </svg>
+                                                        Basic Information
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#tabs-other-8" class="nav-link" data-bs-toggle="tab">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-list-search">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M15 15m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                                            <path d="M18.5 18.5l2.5 2.5" />
+                                                            <path d="M4 6h16" />
+                                                            <path d="M4 12h4" />
+                                                            <path d="M4 18h4" />
+                                                        </svg>
+                                                        Others
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade active show" id="tabs-home-8">
+                                                    <br />
+                                                    <div class="row g-3">
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-8">
+                                                                    <label class="form-label">Course</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['course']?>" />
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <label class="form-label">Year</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['year']?>" />
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <label class="form-label">Section</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['section']?>" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label class="form-label">School Attended</label>
+                                                            <textarea class="form-control"><?=$info['school_attended']?>
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-3">
+                                                                    <label class="form-label">Birth Date</label>
+                                                                    <input type="date" class="form-control"
+                                                                        value="<?=$info['birthdate']?>" />
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <label class="form-label">Height</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['height']?>" />
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <label class="form-label">Weight</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['weight']?>" />
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <label class="form-label">Gender</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['gender']?>" />
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <label class="form-label">Religion</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['religion']?>" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Contact No</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['contact_no']?>" />
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Facebook Account</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['fb_account']?>" />
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label class="form-label">Email Address</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="<?=$info['email']?>" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label class="form-label">Complete Address</label>
+                                                            <textarea class="form-control"><?=$info['house_no']?> <?=$info['street']?> <?=$info['village']?>, <?=$info['municipality']?>, <?=$info['province']?> 
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <label class="form-label"><small>Year & Section</small></label>
-                                                    <h4><?=$cadet['year']?> Year - <?=$cadet['section']?></h4>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <label class="form-label"><small>Gender</small></label>
-                                                    <h4><?=$cadet['gender']?></h4>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <label class="form-label"><small>Date of Birth</small></label>
-                                                    <h4><?=$cadet['birthdate']?></h4>
+                                                <div class="tab-pane fade" id="tabs-other-8">
+                                                    <br />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label class="form-label"><small>Complete Address</small></label>
-                                            <h4>
-                                                <?=$cadet['house_no']?>&nbsp;<?=$cadet['street']?>&nbsp;<?=$cadet['village']?><br/>
-                                                <?=$cadet['municipality']?>&nbsp;<?=$cadet['province']?>
-                                            </h4>
                                         </div>
                                     </div>
                                 </div>

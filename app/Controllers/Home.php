@@ -172,14 +172,13 @@ class Home extends BaseController
             $password = $this->request->getPost('password');
 
             $student = $studentModel->where('school_id', $student_number)->where('status',1)->first();
-            $fullname = $student['fullname'];
 
             if($student)
             {
                 if(Hash::check($password, $student['password']))
                 {
                     session()->set('loggedUser', $student['student_id']);
-                    session()->set('fullname',$fullname);
+                    session()->set('fullname',$student['fullname']);
                     session()->set('student_number',$student['school_id']);
                     return redirect()->to(base_url('cadet/dashboard'));
                 }
@@ -331,6 +330,92 @@ class Home extends BaseController
             return redirect()->to(base_url('cadet/profile'));
         }
         return view('cadet/qrcode',$data);
+    }
+
+    public function upload()
+    {
+        $data['title']="Upload File";
+        $attachmentModel = new \App\Models\attachmentModel();
+        $data['attachment'] = $attachmentModel->where('student_id',session()->get('loggedUser'))->first();
+        return view('cadet/upload',$data);
+    }
+    
+
+    public function removeFile()
+    {
+        $val = $this->request->getPost('value');
+        $attachmentModel = new \App\Models\attachmentModel();
+        //delete the file
+        $attachment = $attachmentModel->WHERE('attachment_id',$val)->first();
+        $filePath = FCPATH . 'assets/files/' . $attachment['file'];
+        if (file_exists($filePath)) 
+        {
+            if (unlink($filePath)) {
+                // echo "success";
+            } else {
+                echo "Failed to delete the file.";
+            }
+        }
+        $data = ['student_id'=>0];
+        $attachmentModel->update($val,$data);
+        echo "success";
+    }
+
+    public function uploadFile()
+    {
+        $validation = $this->validate([
+            'file'=>[
+                'rules' => 'uploaded[file]|mime_in[file,application/zip,application/x-zip-compressed,application/pdf]|max_size[file,25600]',
+                'errors' => [
+                    'uploaded' => 'You must choose a file to upload.',
+                    'mime_in' => 'The file must be either a PDF document.',
+                    'max_size' => 'The file size must not exceed 25MB.',
+                ]
+            ]
+        ]);
+        if(!$validation)
+        {
+            $errors = $this->validator->getErrors();
+            session()->setFlashdata('fail',implode('<br>',$errors));
+            return redirect()->back()->withInput();
+        }
+        else
+        {
+            $attachmentModel = new \App\Models\attachmentModel();
+            //uploading
+            $file = $this->request->getFile('file');
+            if ($file && $file->isValid() && !$file->hasMoved()) 
+            {
+                $extension = $file->getExtension();
+                $originalname = pathinfo($file->getClientName(), PATHINFO_FILENAME);
+                $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalname);
+                $newName = date('YmdHis') . '_' . $safeName . '.' . $extension;
+                //create folder
+                $folderName = "assets/files";
+                if (!is_dir($folderName)) {
+                    mkdir($folderName, 0755, true);
+                }
+                $file->move($folderName.'/',$newName);
+                $attachment = $attachmentModel->WHERE('student_id',session()->get('loggedUser'))->first();
+                $data = ['student_id'=>session()->get('loggedUser'),'file'=>$newName];
+                if(empty($attachment))
+                {
+                    $attachmentModel->save($data);
+                }
+                else
+                {
+                    
+                    $attachmentModel->update($attachment['attachment_id'],$data);
+                }
+                session()->setFlashdata('success','Successfully uploaded');
+                return redirect()->back()->withInput();
+            }
+            else
+            {
+                session()->setFlashdata('fail','File upload failed or no file selected.');
+                return redirect()->back()->withInput();
+            }
+        }
     }
 
     public function studentTrainings()

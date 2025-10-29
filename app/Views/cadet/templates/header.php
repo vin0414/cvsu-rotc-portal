@@ -21,6 +21,7 @@
     <link href="<?=base_url('assets/css/vendors.min.css')?>" rel="stylesheet" />
     <!-- BEGIN DEMO STYLES -->
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
+    <link href="<?=base_url('assets/css/dropzone.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <!-- END DEMO STYLES -->
     <!-- BEGIN CUSTOM FONT -->

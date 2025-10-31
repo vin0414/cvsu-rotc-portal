@@ -69,6 +69,7 @@
                                                 <th>Date</th>
                                                 <th>Time</th>
                                                 <th>Remarks</th>
+                                                <th>Token</th>
                                                 <th>Action</th>
                                             </thead>
                                             <tbody></tbody>
@@ -83,6 +84,7 @@
                                                 <th>Date</th>
                                                 <th>Time</th>
                                                 <th>Remarks</th>
+                                                <th>Token</th>
                                                 <th>Action</th>
                                             </thead>
                                             <tbody></tbody>

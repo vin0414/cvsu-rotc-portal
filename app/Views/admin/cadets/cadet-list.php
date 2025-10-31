@@ -292,6 +292,7 @@
                         $('#modal-loading').modal('hide');
                         if (response.success) {
                             table1.ajax.reload();
+                            table2.ajax.reload();
                         } else {
                             alert(response.errors);
                         }

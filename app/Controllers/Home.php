@@ -15,6 +15,12 @@ class Home extends BaseController
         helper(['url', 'form','text']);
     }
 
+    public function scanner()
+    {
+        $data['title']='Scan QRCode';
+        return view('scanner',$data);
+    }
+
     public function signUp()
     {
         return view('sign-up',['validation' => \Config\Services::validation()]);
@@ -323,12 +329,17 @@ class Home extends BaseController
     {
         $data['title'] = "My QR Code";
         //check if cadets is empty
-        $cadetModel = new cadetModel();
-        $cadet = $cadetModel->where('student_id',session()->get('loggedUser'))->first();
-        if(empty($cadet))
+        $studentModel = new \App\Models\studentModel();
+        $qrcodeModel = new \App\Models\qrcodeModel();
+        $qrcode = $qrcodeModel->where('student_id',session()->get('loggedUser'))->first();
+        $student = $studentModel->where('student_id',session()->get('loggedUser'))->first();
+        if(empty($student))
         {
             return redirect()->to(base_url('cadet/profile'));
         }
+
+        $data['student']=$student;
+        $data['qrcode'] = $qrcode;
         return view('cadet/qrcode',$data);
     }
 

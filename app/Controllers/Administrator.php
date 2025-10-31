@@ -373,6 +373,11 @@ class Administrator extends BaseController
         }
     }
 
+    public function saveAttendance()
+    {
+        return $this->response->setJSON(['success'=>['message'=>'Sucessfully scanned']]);
+    }
+
     public function gradingSystem()
     {
         if(!$this->hasPermission('grading_system'))

@@ -339,6 +339,7 @@
                                     <div class="list-group list-group-hoverable mb-3">
                                         <?php if(!empty($attachment)): ?>
                                         <div class="list-group-item">
+                                            <?=$attachment['file']?>
                                             <a href="<?=base_url('Upload/')?><?=$attachment['file']?>"
                                                 class="btn btn-primary btn-sm" style="padding:5px;float:right;">
                                                 <i class="ti ti-download"></i>

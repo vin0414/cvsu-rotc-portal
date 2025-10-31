@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+//Scanner
+$routes->get('scanner','Home::scanner');
 //student
 $routes->post('validateUser','Home::validateUser');
 $routes->post('register','Home::register');
@@ -14,6 +16,7 @@ $routes->post('upload-file','Home::uploadFile');
 $routes->post('remove-file','Home::removeFile');
 //ajax
 $routes->post('save-profile','Home::saveProfile');
+$routes->post('generate-qr-code','Cadet::qrCode');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -47,6 +50,8 @@ $routes->get('registered','Administrator::registeredUser');
 $routes->get('enrolled','Administrator::enrolledCadet');
 $routes->post('edit-cadet','Administrator::modifyCadet');
 $routes->post('enroll-cadet','Administrator::enrollCadet');
+//attendance
+$routes->post('save-attendance','Administrator::saveAttendance');
 //announcement
 $routes->post('save-announcement','Administrator::saveAnnouncement');
 $routes->post('edit-announcement','Administrator::modifyAnnouncement');

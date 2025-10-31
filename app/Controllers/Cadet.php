@@ -59,4 +59,25 @@ class Cadet extends BaseController
     {
         
     }
+
+    public function qrCode()
+    {
+        $qrcodeModel = new \App\Models\qrcodeModel();
+        //count the number of request
+        $query = $this->db->table('qrcodes')->select('COUNT(*)+1 as total')->get()->getRow();
+        $code = "CN-" . str_pad($query->total, 7, '0', STR_PAD_LEFT);
+        function generateRandomString($length = 64) {
+            // Generate random bytes and convert them to hexadecimal
+            $bytes = random_bytes($length);
+            return substr(bin2hex($bytes), 0, $length);
+        }
+        $token = generateRandomString();
+        $data = [
+            'student_id'=>session()->get('loggedUser'),
+            'control_number'=>$code,
+            'token'=>$token
+        ];
+        $qrcodeModel->save($data);
+        return $this->response->setJSON(['success'=>'Successfully generated']);
+    }
 }

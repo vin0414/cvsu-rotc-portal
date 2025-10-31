@@ -26,8 +26,6 @@
                                     <i class="ti ti-arrow-left"></i>
                                 </a>
                             </div>
-                            <!-- BEGIN MODAL -->
-                            <!-- END MODAL -->
                         </div>
                     </div>
                 </div>

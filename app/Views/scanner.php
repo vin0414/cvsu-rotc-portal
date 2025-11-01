@@ -58,7 +58,7 @@
                                         <div class="form-selectgroup-boxes row mb-3">
                                             <div class="col-lg-6">
                                                 <label class="form-selectgroup-item">
-                                                    <input type="radio" name="status" value="1"
+                                                    <input type="radio" name="status" value="In"
                                                         class="form-selectgroup-input" checked />
                                                     <span class="form-selectgroup-label d-flex align-items-center p-3">
                                                         <span class="me-3">
@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label class="form-selectgroup-item">
-                                                    <input type="radio" name="status" value="0"
+                                                    <input type="radio" name="status" value="Out"
                                                         class="form-selectgroup-input" />
                                                     <span class="form-selectgroup-label d-flex align-items-center p-3">
                                                         <span class="me-3">

@@ -5,6 +5,8 @@ use App\Libraries\Hash;
 use Config\Email;
 use \App\Models\cadetModel;
 use \App\Models\favoriteModel;
+use \App\Models\qrcodeModel;
+use \App\Models\attendanceModel;
 
 class Home extends BaseController
 {
@@ -330,7 +332,7 @@ class Home extends BaseController
         $data['title'] = "My QR Code";
         //check if cadets is empty
         $studentModel = new \App\Models\studentModel();
-        $qrcodeModel = new \App\Models\qrcodeModel();
+        $qrcodeModel = new qrcodeModel();
         $qrcode = $qrcodeModel->where('student_id',session()->get('loggedUser'))->first();
         $student = $studentModel->where('student_id',session()->get('loggedUser'))->first();
         if(empty($student))
@@ -452,6 +454,12 @@ class Home extends BaseController
         {
             return redirect()->to(base_url('cadet/profile'));
         }
+        $qrcodeModel = new qrcodeModel();
+        $attendanceModel = new attendanceModel();
+        $data['qrcode'] = $qrcodeModel->where('student_id',session()->get('loggedUser'))->first();
+        $data['attendance'] = $attendanceModel->where('student_id',session()->get('loggedUser'))
+                                ->orderBy('attendance_id','DESC')->limit(10)
+                                ->findAll();
         return view('cadet/attendance',$data);
     }
 

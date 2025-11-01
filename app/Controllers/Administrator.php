@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Libraries\Hash;
 use App\Models\studentModel;
 use App\Models\cadetModel;
+use App\Models\attendanceModel;
+use App\Models\qrcodeModel;
 
 class Administrator extends BaseController
 {
@@ -367,15 +369,75 @@ class Administrator extends BaseController
         }
         else
         {
-            $title = 'Attendance';
-            $data = ['title'=>$title];
+            $data['title']="Attendance";
+            $attendance = $this->db->table('attendance a')
+                          ->select('a.*,b.fullname,b.school_id')
+                          ->join('students b','b.student_id=a.student_id','LEFT')
+                          ->groupBy('a.attendance_id')
+                          ->get()->getResult();
+            $data['attendance']=$attendance;
+            //summary
+            $summary = $this->db->table('attendance a')
+                       ->select('a.date,b.fullname,b.school_id,
+                        SEC_TO_TIME(TIME_TO_SEC(TIMEDIFF(
+                                MAX(CASE WHEN a.remarks = "Out" THEN a.time END),
+                                MIN(CASE WHEN a.remarks = "In" THEN a.time END)
+                            ))) AS hours,a.token')
+                       ->join('students b','b.student_id=a.student_id','LEFT')
+                       ->groupBy('a.date,a.student_id')
+                       ->get()->getResult();
+            $data['summary']=$summary;
             return view('admin/attendance/all-attendance',$data);
         }
     }
 
     public function saveAttendance()
     {
-        return $this->response->setJSON(['success'=>['message'=>'Sucessfully scanned']]);
+        $attendanceModel = new attendanceModel();
+        $qrcodeModel = new qrcodeModel();
+        $validation = $this->validate([
+            'date'=>'required',
+            'time'=>'required',
+            'status'=>'required'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->setJSON(['errors'=>'Invalid Request']);
+        }
+        else
+        {
+            //check if the qr code exist
+            $code = $this->request->getPost('code');
+            $qrcode = $qrcodeModel->where('token',$code)->first();
+            if(empty($qrcode))
+            {
+                return $this->response->setJSON(['errors'=>'Invalid QR Code. Please try again.']);
+            }
+            else
+            {
+                //check if already scanned
+                $check = $attendanceModel->where('token',$code)
+                                        ->where('date',$this->request->getPost('date'))
+                                        ->where('remarks',$this->request->getPost('status'))
+                                        ->first();
+                if($check)
+                {
+                    return $this->response->setJSON(['errors'=>'You have already scanned your QR Code for today.']);
+                }
+                else
+                {
+                    $data = [
+                        'student_id'=>$qrcode['student_id'],
+                        'date'=>$this->request->getPost('date'),
+                        'time'=>$this->request->getPost('time'),
+                        'remarks'=>$this->request->getPost('status'),
+                        'token'=>$code
+                    ];
+                    $attendanceModel->save($data);
+                    return $this->response->setJSON(['success'=>['message'=>'Successfully scanned']]);
+                }
+            }
+        }
     }
 
     public function gradingSystem()

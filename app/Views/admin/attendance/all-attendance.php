@@ -54,7 +54,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="#tabs-recent-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-clipboard-data"></i>&nbsp;Recent Attendance
+                                        <i class="ti ti-clipboard-data"></i>&nbsp;Summary
                                     </a>
                                 </li>
                             </ul>
@@ -65,14 +65,25 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="table1">
                                             <thead>
-                                                <th>Image</th>
                                                 <th>Date</th>
                                                 <th>Time</th>
+                                                <th>School ID</th>
+                                                <th>Complete Name</th>
                                                 <th>Remarks</th>
                                                 <th>Token</th>
-                                                <th>Action</th>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                <?php foreach($attendance as $row): ?>
+                                                <tr>
+                                                    <td><?=date('F d, Y',strtotime($row->date))?></td>
+                                                    <td><?=date('h:i:s a',strtotime($row->time))?></td>
+                                                    <td><?=$row->school_id?></td>
+                                                    <td><?=$row->fullname?></td>
+                                                    <td><?=$row->remarks?></td>
+                                                    <td><?=$row->token?></td>
+                                                </tr>
+                                                <?php endforeach;?>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -80,14 +91,25 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="table2">
                                             <thead>
-                                                <th>Image</th>
                                                 <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Remarks</th>
+                                                <th>School ID</th>
+                                                <th>Fullname</th>
+                                                <th>Hours</th>
                                                 <th>Token</th>
                                                 <th>Action</th>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                <?php foreach($summary as $row): ?>
+                                                <tr>
+                                                    <td><?=date('F d, Y',strtotime($row->date))?></td>
+                                                    <td><?=$row->school_id?></td>
+                                                    <td><?=$row->fullname?></td>
+                                                    <td><?=date('h:i',strtotime($row->hours))?></td>
+                                                    <td><?=$row->token?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <?php endforeach;?>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

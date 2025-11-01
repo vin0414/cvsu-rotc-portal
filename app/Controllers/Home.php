@@ -456,10 +456,33 @@ class Home extends BaseController
         }
         $qrcodeModel = new qrcodeModel();
         $attendanceModel = new attendanceModel();
+        //total attendance
+        $data['totalAttendance'] = $attendanceModel->where('student_id',session()->get('loggedUser'))
+                        ->whereIn('remarks',['In','Out'])
+                        ->groupBy('date')
+                        ->countAllResults();
+        //late attendance
+        $data['late'] = $attendanceModel->where('student_id',session()->get('loggedUser'))
+                        ->where('remarks','In')
+                        ->where('time >','08:00')
+                        ->countAllResults();
         $data['qrcode'] = $qrcodeModel->where('student_id',session()->get('loggedUser'))->first();
         $data['attendance'] = $attendanceModel->where('student_id',session()->get('loggedUser'))
                                 ->orderBy('attendance_id','DESC')->limit(10)
                                 ->findAll();
+        $summary = $this->db->table('attendance a')
+                    ->select('a.date,b.school_id,
+                    MAX(CASE WHEN a.remarks = "Out" THEN a.time END) timeOut,
+                    MIN(CASE WHEN a.remarks = "In" THEN a.time END) timeIn,
+                    SEC_TO_TIME(TIME_TO_SEC(TIMEDIFF(
+                            MAX(CASE WHEN a.remarks = "Out" THEN a.time END),
+                            MIN(CASE WHEN a.remarks = "In" THEN a.time END)
+                        ))) AS hours,a.token')
+                    ->join('students b','b.student_id=a.student_id','LEFT')
+                    ->where('a.student_id',session()->get('loggedUser'))
+                    ->groupBy('a.date,a.student_id')
+                    ->get()->getResult();
+        $data['summary']=$summary;
         return view('cadet/attendance',$data);
     }
 

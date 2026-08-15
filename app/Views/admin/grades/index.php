@@ -162,7 +162,8 @@
                                                         class="dropdown-item">
                                                         <i class="ti ti-search"></i>&nbsp;View Students
                                                     </a>
-                                                    <a href="" class="dropdown-item">
+                                                    <a href="<?= site_url('gradebook/download/') ?><?= $row->schedule_id ?>"
+                                                        class="dropdown-item">
                                                         <i class="ti ti-file-spreadsheet"></i>&nbsp;Grade Sheet
                                                     </a>
                                                 </div>

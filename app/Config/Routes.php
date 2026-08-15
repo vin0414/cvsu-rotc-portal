@@ -142,6 +142,7 @@ $routes->group('',['filter'=>'AdminCheck'],function($routes)
     $routes->get('gradebook','Administrator::gradingSystem');
     $routes->get('gradebook/grades/add/(:any)','Administrator::addGrades/$1');
     $routes->get('gradebook/view/(:any)','Administrator::viewGradeBook/$1');
+    $routes->get('gradebook/download/(:any)','Export::downloadGrades/$1');
     //subjects
     $routes->get('gradebook/subject','Administrator::allSubject');
     $routes->get('gradebook/subject/create','Administrator::createSubject');

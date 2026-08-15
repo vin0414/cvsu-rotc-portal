@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use Dompdf\Dompdf;
+use App\Models\scheduleModel;
+use App\Models\batchModel;
 
 class Export extends BaseController
 {
@@ -251,5 +253,21 @@ class Export extends BaseController
 
         // Stream to browser
         $dompdf->stream("inventory.pdf", ["Attachment" => true]);
+    }
+
+    public function downloadGrades($id)
+    {
+        $scheduleModel = new scheduleModel();
+        $schedule = $scheduleModel->where('schedule_id',$id)->first();
+        $batchModel = new batchModel();
+        $batch = $batchModel->where('batch_id',$schedule['batch_id'])->first();
+        //students
+        $students = $this->db->table('trainings a')
+            ->select('a.student_id,b.firstname,b.middlename,b.lastname,b.school_id,c.course,c.year,c.section')
+            ->join('students b','b.student_id=a.student_id','LEFT')
+            ->join('cadets c','c.student_id=b.student_id','LEFT')
+            ->where('a.schedule_id',$id)
+            ->groupBy('a.training_id,c.course,c.year,c.section')
+            ->get()->getResult();
     }
 }

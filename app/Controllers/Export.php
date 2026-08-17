@@ -263,11 +263,54 @@ class Export extends BaseController
         $batch = $batchModel->where('batch_id',$schedule['batch_id'])->first();
         //students
         $students = $this->db->table('trainings a')
-            ->select('a.student_id,b.firstname,b.middlename,b.lastname,b.school_id,c.course,c.year,c.section')
+            ->select('a.student_id,b.school_id,b.firstname,b.middlename,b.lastname,b.school_id,c.course,c.section,d.finalGrade,d.remarks')
             ->join('students b','b.student_id=a.student_id','LEFT')
             ->join('cadets c','c.student_id=b.student_id','LEFT')
+            ->join('student_performance d','d.student_id=a.student_id','LEFT')
             ->where('a.schedule_id',$id)
-            ->groupBy('a.training_id,c.course,c.year,c.section')
+            ->groupBy('a.training_id,c.course,c.section,d.finalGrade,d.remarks')
             ->get()->getResult();
+        //generate csv file
+        $filename = 'grading_sheet_' . date('Ymd') . '.csv';
+
+        // Set the appropriate headers to force the file download
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/csv; charset=UTF-8"); //
+        // Open the PHP output stream
+        $file = fopen('php://output', 'w');
+        // 4. WRITE THE META HEADER ROWS (Acts as your logo text & details)
+        fputcsv($file, ['Grading Sheet - NSTP Unit']); // Text placeholder for logo
+        fputcsv($file, ['Subject:', 'NSTP1-ROTC ('.$batch['school_year'].')']);
+        fputcsv($file, ['Title:', 'NATIONAL SERVICE TRAINING PROGRAM (NSTP) 1']);
+        fputcsv($file, ['Curriculum Year:', $batch['school_year']]);
+        fputcsv($file, ['Course:', 'ROTC 1']);
+        fputcsv($file, ['Semester/Summer:', $batch['semester'].' Semester']);
+        fputcsv($file, ['Generated On:', date('Y-m-d H:i:s')]);
+        
+        // 5. INSERT BLANK ROWS FOR SPACING (Breathing room before the table)
+        fputcsv($file, []); 
+        fputcsv($file, []); 
+        // 6. WRITE THE ACTUAL TABLE COLUMN HEADERS
+        $columnHeaders = ['Name', 'Student Number', 'Course & Section', 'Grades', 'Credit', 'Remarks'];
+        fputcsv($file, $columnHeaders);
+
+        // 7. LOOP AND WRITE THE DATABASE ROWS
+        foreach ($students as $row) {
+            $fullname = $row->lastname .", ".$row->firstname. " ".$row->middlename ;
+            $course = $row->course ." - ".$row->section;
+            $credit = "3";
+            $line = [
+                $fullname,
+                $row->school_id,
+                $course,
+                $row->finalGrade ?? 0,
+                $credit,
+                strtoupper($row->remarks) ?? 'N/A'
+            ];
+            fputcsv($file, $line);
+        }
+        fclose($file);
+        exit;
     }
 }
